@@ -1,5 +1,6 @@
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
+import CustomerJourney from './components/CustomerJourney';
 import OutcomeSection from './components/OutcomeSection';
 import HowItWorks from './components/HowItWorks';
 import UseCases from './components/UseCases';
@@ -13,6 +14,7 @@ function App() {
     <div className="min-h-screen bg-white">
       <Navigation />
       <Hero />
+      <CustomerJourney />
       <OutcomeSection />
       <HowItWorks />
       <UseCases />
