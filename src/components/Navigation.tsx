@@ -26,7 +26,7 @@ export default function Navigation() {
             <button className="text-slate-700 hover:text-slate-900 font-medium transition-colors">
               Sign in
             </button>
-            <button className="px-5 py-2 bg-slate-900 text-white rounded-lg font-medium hover:bg-slate-800 transition-colors">
+            <button onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })} className="px-5 py-2 bg-slate-900 text-white rounded-lg font-medium hover:bg-slate-800 transition-colors">
               Get started
             </button>
           </div>

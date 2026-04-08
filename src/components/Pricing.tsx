@@ -109,6 +109,7 @@ export default function Pricing() {
               </div>
 
               <button
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 className={`w-full py-3 px-6 rounded-lg font-semibold mb-8 transition-colors ${
                   plan.highlighted
                     ? 'bg-white text-slate-900 hover:bg-slate-100'

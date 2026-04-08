@@ -8,7 +8,7 @@ export default function CTA() {
         <p className="text-xl text-slate-300 mb-10">
           Create your first QR code for free. No credit card required.
         </p>
-        <button className="px-8 py-4 bg-white text-slate-900 rounded-lg font-semibold text-lg hover:bg-slate-100 transition-colors shadow-xl">
+        <button onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })} className="px-8 py-4 bg-white text-slate-900 rounded-lg font-semibold text-lg hover:bg-slate-100 transition-colors shadow-xl">
           Create free QR
         </button>
       </div>
