@@ -47,7 +47,7 @@ export default function UseCases() {
             return (
               <div
                 key={index}
-                className="p-6 bg-slate-50 rounded-xl border border-slate-200 hover:border-slate-300 transition-all hover:shadow-md text-center"
+                className="p-6 bg-slate-50 rounded-xl border border-slate-200 text-center"
               >
                 <div className="w-12 h-12 bg-white border border-slate-200 rounded-lg flex items-center justify-center mx-auto mb-4">
                   <Icon className="w-6 h-6 text-slate-900" />
