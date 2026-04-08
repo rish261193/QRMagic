@@ -50,7 +50,8 @@ export default function Hero() {
             <div className="bg-white rounded-2xl shadow-2xl shadow-slate-900/10 p-8 w-72">
 
               {/* QR code — gradient circles with center logo */}
-              <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto mb-3">
+              <div className="relative mb-3">
+              <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
                 <defs>
                   <linearGradient id="qrGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                     <stop offset="0%" stopColor="#0f172a" />
