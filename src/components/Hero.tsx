@@ -46,7 +46,7 @@ export default function Hero() {
           </div>
 
           {/* Right column — QR mockup card */}
-          <div className="flex justify-center lg:justify-end">
+          <div className="flex items-center justify-center lg:justify-end">
             <div className="bg-white rounded-2xl shadow-2xl shadow-slate-900/10 p-8 w-72">
 
               {/* QR wrapper — relative so plain overlay can sit on top */}
@@ -343,7 +343,7 @@ export default function Hero() {
                 <div className="bg-emerald-50 rounded-xl px-4 py-3">
                   <div className="flex items-center gap-1.5 mb-1">
                     <Clock className="w-4 h-4 text-emerald-600" />
-                    <span className="text-xl font-bold text-slate-900">2–4pm</span>
+                    <span className="text-xl font-bold text-slate-900 whitespace-nowrap">2–4pm</span>
                   </div>
                   <p className="text-xs text-slate-500">Busiest scan window</p>
                 </div>
