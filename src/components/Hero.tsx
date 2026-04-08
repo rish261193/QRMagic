@@ -3,7 +3,7 @@ import { QrCode, Check, Clock, Mail } from 'lucide-react';
 export default function Hero() {
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-slate-50 to-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-24 sm:pt-24 sm:pb-32">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-12 sm:pt-24 sm:pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
           {/* Left column — text */}
@@ -334,7 +334,7 @@ export default function Hero() {
               </div>{/* end QR wrapper */}
 
               {/* Scan me button */}
-              <button className="w-full py-2 mb-4 text-sm font-semibold text-slate-500 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors">
+              <button className="w-full py-2.5 mb-4 text-sm font-semibold bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-colors">
                 Scan me →
               </button>
 
@@ -343,14 +343,14 @@ export default function Hero() {
                 <div className="bg-emerald-50 rounded-xl px-4 py-3">
                   <div className="flex items-center gap-1.5 mb-1">
                     <Clock className="w-4 h-4 text-emerald-600" />
-                    <span className="text-sm font-bold text-slate-900">2–4pm</span>
+                    <span className="text-xl font-bold text-slate-900">2–4pm</span>
                   </div>
                   <p className="text-xs text-slate-500">Busiest scan window</p>
                 </div>
                 <div className="bg-emerald-50 rounded-xl px-4 py-3">
                   <div className="flex items-center gap-1.5 mb-1">
                     <Mail className="w-4 h-4 text-emerald-600" />
-                    <span className="text-sm font-bold text-slate-900">12 emails</span>
+                    <span className="text-xl font-bold text-slate-900">12 emails</span>
                   </div>
                   <p className="text-xs text-slate-500">Captured this week</p>
                 </div>
