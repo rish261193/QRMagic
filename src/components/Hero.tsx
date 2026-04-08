@@ -48,112 +48,177 @@ export default function Hero() {
           {/* Right column — QR mockup card */}
           <div className="flex justify-center lg:justify-end">
             <div className="bg-white rounded-2xl shadow-2xl shadow-slate-900/10 p-8 w-72">
-              <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto mb-6">
+
+              {/* QR code — gradient circles with center logo */}
+              <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto mb-3">
+                <defs>
+                  <linearGradient id="qrGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#0f172a" />
+                    <stop offset="100%" stopColor="#0d9488" />
+                  </linearGradient>
+                </defs>
+
                 {/* Top-left finder pattern */}
-                <rect x="0" y="0" width="7" height="7" fill="#0f172a"/>
-                <rect x="1" y="1" width="5" height="5" fill="white"/>
-                <rect x="2" y="2" width="3" height="3" fill="#0f172a"/>
+                <rect x="0.2" y="0.2" width="6.6" height="6.6" rx="1.2" fill="url(#qrGradient)"/>
+                <rect x="1.2" y="1.2" width="4.6" height="4.6" rx="0.8" fill="white"/>
+                <rect x="2.2" y="2.2" width="2.6" height="2.6" rx="0.5" fill="url(#qrGradient)"/>
+
                 {/* Top-right finder pattern */}
-                <rect x="14" y="0" width="7" height="7" fill="#0f172a"/>
-                <rect x="15" y="1" width="5" height="5" fill="white"/>
-                <rect x="16" y="2" width="3" height="3" fill="#0f172a"/>
+                <rect x="14.2" y="0.2" width="6.6" height="6.6" rx="1.2" fill="url(#qrGradient)"/>
+                <rect x="15.2" y="1.2" width="4.6" height="4.6" rx="0.8" fill="white"/>
+                <rect x="16.2" y="2.2" width="2.6" height="2.6" rx="0.5" fill="url(#qrGradient)"/>
+
                 {/* Bottom-left finder pattern */}
-                <rect x="0" y="14" width="7" height="7" fill="#0f172a"/>
-                <rect x="1" y="15" width="5" height="5" fill="white"/>
-                <rect x="2" y="16" width="3" height="3" fill="#0f172a"/>
-                {/* Timing patterns */}
-                <rect x="8" y="6" width="1" height="1" fill="#0f172a"/>
-                <rect x="10" y="6" width="1" height="1" fill="#0f172a"/>
-                <rect x="12" y="6" width="1" height="1" fill="#0f172a"/>
-                <rect x="6" y="8" width="1" height="1" fill="#0f172a"/>
-                <rect x="6" y="10" width="1" height="1" fill="#0f172a"/>
-                <rect x="6" y="12" width="1" height="1" fill="#0f172a"/>
+                <rect x="0.2" y="14.2" width="6.6" height="6.6" rx="1.2" fill="url(#qrGradient)"/>
+                <rect x="1.2" y="15.2" width="4.6" height="4.6" rx="0.8" fill="white"/>
+                <rect x="2.2" y="16.2" width="2.6" height="2.6" rx="0.5" fill="url(#qrGradient)"/>
+
+                {/* Timing pattern */}
+                <circle cx="8.5" cy="6.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="10.5" cy="6.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="12.5" cy="6.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="6.5" cy="8.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="6.5" cy="10.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="6.5" cy="12.5" r="0.4" fill="url(#qrGradient)"/>
+
                 {/* Data modules — top strip */}
-                <rect x="8" y="0" width="1" height="1" fill="#0f172a"/>
-                <rect x="10" y="0" width="1" height="1" fill="#0f172a"/>
-                <rect x="12" y="0" width="1" height="1" fill="#0f172a"/>
-                <rect x="9" y="1" width="1" height="1" fill="#0f172a"/>
-                <rect x="11" y="1" width="1" height="1" fill="#0f172a"/>
-                <rect x="8" y="2" width="2" height="1" fill="#0f172a"/>
-                <rect x="11" y="2" width="2" height="1" fill="#0f172a"/>
-                <rect x="9" y="3" width="1" height="1" fill="#0f172a"/>
-                <rect x="12" y="3" width="1" height="1" fill="#0f172a"/>
-                <rect x="8" y="4" width="2" height="1" fill="#0f172a"/>
-                <rect x="11" y="4" width="2" height="1" fill="#0f172a"/>
-                <rect x="9" y="5" width="2" height="1" fill="#0f172a"/>
-                <rect x="12" y="5" width="1" height="1" fill="#0f172a"/>
+                <circle cx="8.5" cy="0.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="10.5" cy="0.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="12.5" cy="0.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="9.5" cy="1.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="11.5" cy="1.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="8.5" cy="2.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="9.5" cy="2.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="11.5" cy="2.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="12.5" cy="2.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="9.5" cy="3.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="12.5" cy="3.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="8.5" cy="4.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="9.5" cy="4.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="11.5" cy="4.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="12.5" cy="4.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="9.5" cy="5.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="10.5" cy="5.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="12.5" cy="5.5" r="0.4" fill="url(#qrGradient)"/>
+
                 {/* Data modules — middle band */}
-                <rect x="0" y="8" width="1" height="1" fill="#0f172a"/>
-                <rect x="2" y="8" width="2" height="1" fill="#0f172a"/>
-                <rect x="5" y="8" width="1" height="1" fill="#0f172a"/>
-                <rect x="8" y="8" width="2" height="1" fill="#0f172a"/>
-                <rect x="11" y="8" width="1" height="1" fill="#0f172a"/>
-                <rect x="13" y="8" width="2" height="1" fill="#0f172a"/>
-                <rect x="16" y="8" width="2" height="1" fill="#0f172a"/>
-                <rect x="19" y="8" width="2" height="1" fill="#0f172a"/>
-                <rect x="1" y="9" width="2" height="1" fill="#0f172a"/>
-                <rect x="5" y="9" width="1" height="1" fill="#0f172a"/>
-                <rect x="8" y="9" width="1" height="1" fill="#0f172a"/>
-                <rect x="10" y="9" width="2" height="1" fill="#0f172a"/>
-                <rect x="14" y="9" width="1" height="1" fill="#0f172a"/>
-                <rect x="17" y="9" width="1" height="1" fill="#0f172a"/>
-                <rect x="20" y="9" width="1" height="1" fill="#0f172a"/>
-                <rect x="0" y="10" width="3" height="1" fill="#0f172a"/>
-                <rect x="4" y="10" width="2" height="1" fill="#0f172a"/>
-                <rect x="9" y="10" width="1" height="1" fill="#0f172a"/>
-                <rect x="12" y="10" width="2" height="1" fill="#0f172a"/>
-                <rect x="15" y="10" width="1" height="1" fill="#0f172a"/>
-                <rect x="18" y="10" width="2" height="1" fill="#0f172a"/>
-                <rect x="2" y="11" width="1" height="1" fill="#0f172a"/>
-                <rect x="5" y="11" width="2" height="1" fill="#0f172a"/>
-                <rect x="8" y="11" width="2" height="1" fill="#0f172a"/>
-                <rect x="11" y="11" width="1" height="1" fill="#0f172a"/>
-                <rect x="14" y="11" width="2" height="1" fill="#0f172a"/>
-                <rect x="17" y="11" width="1" height="1" fill="#0f172a"/>
-                <rect x="19" y="11" width="2" height="1" fill="#0f172a"/>
-                <rect x="0" y="12" width="2" height="1" fill="#0f172a"/>
-                <rect x="4" y="12" width="1" height="1" fill="#0f172a"/>
-                <rect x="7" y="12" width="1" height="1" fill="#0f172a"/>
-                <rect x="9" y="12" width="2" height="1" fill="#0f172a"/>
-                <rect x="13" y="12" width="1" height="1" fill="#0f172a"/>
-                <rect x="16" y="12" width="2" height="1" fill="#0f172a"/>
-                <rect x="20" y="12" width="1" height="1" fill="#0f172a"/>
+                <circle cx="0.5" cy="8.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="2.5" cy="8.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="3.5" cy="8.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="5.5" cy="8.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="8.5" cy="8.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="9.5" cy="8.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="11.5" cy="8.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="13.5" cy="8.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="14.5" cy="8.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="16.5" cy="8.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="17.5" cy="8.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="19.5" cy="8.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="20.5" cy="8.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="1.5" cy="9.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="2.5" cy="9.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="5.5" cy="9.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="8.5" cy="9.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="10.5" cy="9.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="11.5" cy="9.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="14.5" cy="9.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="17.5" cy="9.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="20.5" cy="9.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="0.5" cy="10.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="1.5" cy="10.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="2.5" cy="10.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="4.5" cy="10.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="5.5" cy="10.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="9.5" cy="10.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="12.5" cy="10.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="13.5" cy="10.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="15.5" cy="10.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="18.5" cy="10.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="19.5" cy="10.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="2.5" cy="11.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="5.5" cy="11.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="6.5" cy="11.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="8.5" cy="11.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="9.5" cy="11.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="11.5" cy="11.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="14.5" cy="11.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="15.5" cy="11.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="17.5" cy="11.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="19.5" cy="11.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="20.5" cy="11.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="0.5" cy="12.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="1.5" cy="12.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="4.5" cy="12.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="7.5" cy="12.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="9.5" cy="12.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="10.5" cy="12.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="13.5" cy="12.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="16.5" cy="12.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="17.5" cy="12.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="20.5" cy="12.5" r="0.4" fill="url(#qrGradient)"/>
+
                 {/* Data modules — bottom strip */}
-                <rect x="8" y="14" width="2" height="1" fill="#0f172a"/>
-                <rect x="11" y="14" width="1" height="1" fill="#0f172a"/>
-                <rect x="13" y="14" width="2" height="1" fill="#0f172a"/>
-                <rect x="16" y="14" width="1" height="1" fill="#0f172a"/>
-                <rect x="18" y="14" width="2" height="1" fill="#0f172a"/>
-                <rect x="9" y="15" width="1" height="1" fill="#0f172a"/>
-                <rect x="12" y="15" width="1" height="1" fill="#0f172a"/>
-                <rect x="14" y="15" width="2" height="1" fill="#0f172a"/>
-                <rect x="17" y="15" width="1" height="1" fill="#0f172a"/>
-                <rect x="20" y="15" width="1" height="1" fill="#0f172a"/>
-                <rect x="8" y="16" width="1" height="1" fill="#0f172a"/>
-                <rect x="10" y="16" width="2" height="1" fill="#0f172a"/>
-                <rect x="13" y="16" width="1" height="1" fill="#0f172a"/>
-                <rect x="15" y="16" width="2" height="1" fill="#0f172a"/>
-                <rect x="19" y="16" width="1" height="1" fill="#0f172a"/>
-                <rect x="9" y="17" width="2" height="1" fill="#0f172a"/>
-                <rect x="12" y="17" width="2" height="1" fill="#0f172a"/>
-                <rect x="16" y="17" width="1" height="1" fill="#0f172a"/>
-                <rect x="18" y="17" width="2" height="1" fill="#0f172a"/>
-                <rect x="8" y="18" width="1" height="1" fill="#0f172a"/>
-                <rect x="11" y="18" width="1" height="1" fill="#0f172a"/>
-                <rect x="13" y="18" width="2" height="1" fill="#0f172a"/>
-                <rect x="17" y="18" width="1" height="1" fill="#0f172a"/>
-                <rect x="20" y="18" width="1" height="1" fill="#0f172a"/>
-                <rect x="9" y="19" width="1" height="1" fill="#0f172a"/>
-                <rect x="12" y="19" width="1" height="1" fill="#0f172a"/>
-                <rect x="14" y="19" width="2" height="1" fill="#0f172a"/>
-                <rect x="18" y="19" width="1" height="1" fill="#0f172a"/>
-                <rect x="8" y="20" width="2" height="1" fill="#0f172a"/>
-                <rect x="11" y="20" width="2" height="1" fill="#0f172a"/>
-                <rect x="15" y="20" width="1" height="1" fill="#0f172a"/>
-                <rect x="17" y="20" width="2" height="1" fill="#0f172a"/>
-                <rect x="20" y="20" width="1" height="1" fill="#0f172a"/>
+                <circle cx="8.5" cy="14.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="9.5" cy="14.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="11.5" cy="14.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="13.5" cy="14.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="14.5" cy="14.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="16.5" cy="14.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="18.5" cy="14.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="19.5" cy="14.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="9.5" cy="15.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="12.5" cy="15.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="14.5" cy="15.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="15.5" cy="15.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="17.5" cy="15.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="20.5" cy="15.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="8.5" cy="16.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="10.5" cy="16.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="11.5" cy="16.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="13.5" cy="16.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="15.5" cy="16.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="16.5" cy="16.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="19.5" cy="16.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="9.5" cy="17.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="10.5" cy="17.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="12.5" cy="17.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="13.5" cy="17.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="16.5" cy="17.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="18.5" cy="17.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="19.5" cy="17.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="8.5" cy="18.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="11.5" cy="18.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="13.5" cy="18.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="14.5" cy="18.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="17.5" cy="18.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="20.5" cy="18.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="9.5" cy="19.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="12.5" cy="19.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="14.5" cy="19.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="15.5" cy="19.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="18.5" cy="19.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="8.5" cy="20.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="9.5" cy="20.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="11.5" cy="20.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="12.5" cy="20.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="15.5" cy="20.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="17.5" cy="20.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="18.5" cy="20.5" r="0.4" fill="url(#qrGradient)"/>
+                <circle cx="20.5" cy="20.5" r="0.4" fill="url(#qrGradient)"/>
+
+                {/* Center logo — white circle with store icon */}
+                <circle cx="10.5" cy="10.5" r="2.3" fill="white" stroke="#e2e8f0" strokeWidth="0.15"/>
+                <polygon points="9.3,10.5 10.5,9.2 11.7,10.5" fill="url(#qrGradient)"/>
+                <rect x="9.5" y="10.4" width="2" height="1.6" rx="0.2" fill="url(#qrGradient)"/>
+                <rect x="10.1" y="11.1" width="0.8" height="0.9" rx="0.1" fill="white"/>
               </svg>
 
+              {/* Scan me button */}
+              <button className="w-full py-2 mb-4 text-sm font-semibold text-slate-500 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors">
+                Scan me →
+              </button>
+
+              {/* Stats */}
               <div className="grid grid-cols-2 gap-3">
                 <div className="bg-emerald-50 rounded-xl px-4 py-3">
                   <div className="flex items-center gap-1.5 mb-1">
@@ -170,6 +235,7 @@ export default function Hero() {
                   <p className="text-xs text-slate-500">Captured this week</p>
                 </div>
               </div>
+
             </div>
           </div>
 
