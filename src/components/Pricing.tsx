@@ -32,7 +32,7 @@ const plans = [
   },
   {
     name: 'Growth',
-    price: '$49',
+    price: '$12',
     period: 'per month',
     description: 'Scale your customer acquisition',
     features: [
