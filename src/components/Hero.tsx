@@ -333,6 +333,193 @@ export default function Hero() {
 
               </div>{/* end QR wrapper */}
 
+              {/* Style picker */}
+              <div className="mb-3">
+                <p className="text-xs text-slate-400 mb-2">Choose your style</p>
+                <div className="flex gap-2">
+
+                  {/* Classic */}
+                  <div className="flex flex-col items-center gap-1 flex-1">
+                    <div className="w-full rounded-lg overflow-hidden border border-slate-200 p-0.5 bg-white">
+                      <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
+                        <rect width="21" height="21" fill="white"/>
+                        <rect x="0" y="0" width="7" height="7" fill="#0f172a"/>
+                        <rect x="1" y="1" width="5" height="5" fill="white"/>
+                        <rect x="2" y="2" width="3" height="3" fill="#0f172a"/>
+                        <rect x="14" y="0" width="7" height="7" fill="#0f172a"/>
+                        <rect x="15" y="1" width="5" height="5" fill="white"/>
+                        <rect x="16" y="2" width="3" height="3" fill="#0f172a"/>
+                        <rect x="0" y="14" width="7" height="7" fill="#0f172a"/>
+                        <rect x="1" y="15" width="5" height="5" fill="white"/>
+                        <rect x="2" y="16" width="3" height="3" fill="#0f172a"/>
+                        <rect x="8" y="1" width="1" height="1" fill="#0f172a"/>
+                        <rect x="10" y="1" width="1" height="1" fill="#0f172a"/>
+                        <rect x="12" y="1" width="1" height="1" fill="#0f172a"/>
+                        <rect x="9" y="2" width="1" height="1" fill="#0f172a"/>
+                        <rect x="9" y="4" width="1" height="1" fill="#0f172a"/>
+                        <rect x="11" y="4" width="2" height="1" fill="#0f172a"/>
+                        <rect x="8" y="6" width="1" height="1" fill="#0f172a"/>
+                        <rect x="1" y="9" width="2" height="1" fill="#0f172a"/>
+                        <rect x="5" y="9" width="1" height="1" fill="#0f172a"/>
+                        <rect x="8" y="8" width="4" height="1" fill="#0f172a"/>
+                        <rect x="14" y="8" width="2" height="1" fill="#0f172a"/>
+                        <rect x="19" y="9" width="2" height="1" fill="#0f172a"/>
+                        <rect x="2" y="11" width="3" height="1" fill="#0f172a"/>
+                        <rect x="9" y="10" width="2" height="1" fill="#0f172a"/>
+                        <rect x="15" y="11" width="4" height="1" fill="#0f172a"/>
+                        <rect x="9" y="14" width="3" height="1" fill="#0f172a"/>
+                        <rect x="14" y="15" width="3" height="1" fill="#0f172a"/>
+                        <rect x="18" y="16" width="2" height="1" fill="#0f172a"/>
+                        <rect x="10" y="17" width="3" height="1" fill="#0f172a"/>
+                        <rect x="15" y="18" width="2" height="1" fill="#0f172a"/>
+                        <rect x="9" y="20" width="2" height="1" fill="#0f172a"/>
+                        <rect x="18" y="20" width="2" height="1" fill="#0f172a"/>
+                      </svg>
+                    </div>
+                    <span className="text-xs text-slate-400">Classic</span>
+                  </div>
+
+                  {/* Brand — selected */}
+                  <div className="flex flex-col items-center gap-1 flex-1">
+                    <div className="w-full rounded-lg overflow-hidden ring-2 ring-teal-500 p-0.5 bg-white">
+                      <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
+                        <rect width="21" height="21" fill="white"/>
+                        <defs>
+                          <linearGradient id="tn1" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stopColor="#0f172a"/>
+                            <stop offset="100%" stopColor="#0d9488"/>
+                          </linearGradient>
+                        </defs>
+                        <rect x="0.2" y="0.2" width="6.6" height="6.6" rx="1.2" fill="url(#tn1)"/>
+                        <rect x="1.2" y="1.2" width="4.6" height="4.6" rx="0.8" fill="white"/>
+                        <rect x="2.2" y="2.2" width="2.6" height="2.6" rx="0.5" fill="url(#tn1)"/>
+                        <rect x="14.2" y="0.2" width="6.6" height="6.6" rx="1.2" fill="url(#tn1)"/>
+                        <rect x="15.2" y="1.2" width="4.6" height="4.6" rx="0.8" fill="white"/>
+                        <rect x="16.2" y="2.2" width="2.6" height="2.6" rx="0.5" fill="url(#tn1)"/>
+                        <rect x="0.2" y="14.2" width="6.6" height="6.6" rx="1.2" fill="url(#tn1)"/>
+                        <rect x="1.2" y="15.2" width="4.6" height="4.6" rx="0.8" fill="white"/>
+                        <rect x="2.2" y="16.2" width="2.6" height="2.6" rx="0.5" fill="url(#tn1)"/>
+                        <circle cx="8.5" cy="1.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="10.5" cy="1.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="12.5" cy="1.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="9.5" cy="2.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="9.5" cy="4.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="11.5" cy="4.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="12.5" cy="4.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="8.5" cy="6.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="1.5" cy="9.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="2.5" cy="9.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="5.5" cy="9.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="8.5" cy="8.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="9.5" cy="8.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="10.5" cy="8.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="11.5" cy="8.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="14.5" cy="8.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="15.5" cy="8.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="19.5" cy="9.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="20.5" cy="9.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="2.5" cy="11.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="3.5" cy="11.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="4.5" cy="11.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="9.5" cy="10.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="10.5" cy="10.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="15.5" cy="11.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="16.5" cy="11.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="18.5" cy="11.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="9.5" cy="14.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="10.5" cy="14.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="11.5" cy="14.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="14.5" cy="15.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="15.5" cy="15.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="17.5" cy="15.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="18.5" cy="16.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="19.5" cy="16.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="10.5" cy="17.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="11.5" cy="17.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="12.5" cy="17.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="15.5" cy="18.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="16.5" cy="18.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="9.5" cy="20.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="10.5" cy="20.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="18.5" cy="20.5" r="0.4" fill="url(#tn1)"/>
+                        <circle cx="19.5" cy="20.5" r="0.4" fill="url(#tn1)"/>
+                      </svg>
+                    </div>
+                    <span className="text-xs text-teal-600 font-medium">Brand</span>
+                  </div>
+
+                  {/* Bold */}
+                  <div className="flex flex-col items-center gap-1 flex-1">
+                    <div className="w-full rounded-lg overflow-hidden border border-slate-200 p-0.5 bg-white">
+                      <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
+                        <rect width="21" height="21" fill="white"/>
+                        <defs>
+                          <linearGradient id="tn2" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stopColor="#f97316"/>
+                            <stop offset="100%" stopColor="#dc2626"/>
+                          </linearGradient>
+                        </defs>
+                        <rect x="0.2" y="0.2" width="6.6" height="6.6" rx="1.2" fill="url(#tn2)"/>
+                        <rect x="1.2" y="1.2" width="4.6" height="4.6" rx="0.8" fill="white"/>
+                        <rect x="2.2" y="2.2" width="2.6" height="2.6" rx="0.5" fill="url(#tn2)"/>
+                        <rect x="14.2" y="0.2" width="6.6" height="6.6" rx="1.2" fill="url(#tn2)"/>
+                        <rect x="15.2" y="1.2" width="4.6" height="4.6" rx="0.8" fill="white"/>
+                        <rect x="16.2" y="2.2" width="2.6" height="2.6" rx="0.5" fill="url(#tn2)"/>
+                        <rect x="0.2" y="14.2" width="6.6" height="6.6" rx="1.2" fill="url(#tn2)"/>
+                        <rect x="1.2" y="15.2" width="4.6" height="4.6" rx="0.8" fill="white"/>
+                        <rect x="2.2" y="16.2" width="2.6" height="2.6" rx="0.5" fill="url(#tn2)"/>
+                        <circle cx="8.5" cy="1.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="10.5" cy="1.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="12.5" cy="1.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="9.5" cy="2.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="9.5" cy="4.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="11.5" cy="4.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="12.5" cy="4.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="8.5" cy="6.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="1.5" cy="9.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="2.5" cy="9.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="5.5" cy="9.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="8.5" cy="8.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="9.5" cy="8.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="10.5" cy="8.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="11.5" cy="8.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="14.5" cy="8.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="15.5" cy="8.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="19.5" cy="9.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="20.5" cy="9.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="2.5" cy="11.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="3.5" cy="11.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="4.5" cy="11.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="9.5" cy="10.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="10.5" cy="10.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="15.5" cy="11.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="16.5" cy="11.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="18.5" cy="11.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="9.5" cy="14.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="10.5" cy="14.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="11.5" cy="14.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="14.5" cy="15.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="15.5" cy="15.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="17.5" cy="15.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="18.5" cy="16.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="19.5" cy="16.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="10.5" cy="17.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="11.5" cy="17.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="12.5" cy="17.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="15.5" cy="18.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="16.5" cy="18.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="9.5" cy="20.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="10.5" cy="20.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="18.5" cy="20.5" r="0.4" fill="url(#tn2)"/>
+                        <circle cx="19.5" cy="20.5" r="0.4" fill="url(#tn2)"/>
+                      </svg>
+                    </div>
+                    <span className="text-xs text-slate-400">Bold</span>
+                  </div>
+
+                </div>
+              </div>
+
               {/* Scan me button */}
               <button className="w-full py-2.5 mb-4 text-sm font-semibold bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-colors">
                 Scan me →
