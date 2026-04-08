@@ -1,6 +1,6 @@
 export default function CTA() {
   return (
-    <section className="py-20 sm:py-24 bg-slate-900">
+    <section className="py-24 sm:py-32 bg-slate-900">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
           Ready to turn scans into customers?
