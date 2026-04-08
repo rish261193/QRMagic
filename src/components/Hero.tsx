@@ -1,4 +1,4 @@
-import { QrCode, Check, TrendingUp } from 'lucide-react';
+import { QrCode, Check, Clock, Mail } from 'lucide-react';
 
 export default function Hero() {
   return (
@@ -154,14 +154,20 @@ export default function Hero() {
                 <rect x="20" y="20" width="1" height="1" fill="#0f172a"/>
               </svg>
 
-              <div className="flex items-center justify-between bg-emerald-50 rounded-xl px-4 py-3">
-                <div>
-                  <p className="text-xs text-slate-500 font-medium">Scans today</p>
-                  <p className="text-2xl font-bold text-slate-900">47</p>
+              <div className="grid grid-cols-2 gap-3">
+                <div className="bg-emerald-50 rounded-xl px-4 py-3">
+                  <div className="flex items-center gap-1.5 mb-1">
+                    <Clock className="w-4 h-4 text-emerald-600" />
+                    <span className="text-sm font-bold text-slate-900">2–4pm</span>
+                  </div>
+                  <p className="text-xs text-slate-500">Busiest scan window</p>
                 </div>
-                <div className="flex items-center gap-1 text-emerald-600">
-                  <TrendingUp className="w-5 h-5" />
-                  <span className="text-sm font-semibold">+12%</span>
+                <div className="bg-emerald-50 rounded-xl px-4 py-3">
+                  <div className="flex items-center gap-1.5 mb-1">
+                    <Mail className="w-4 h-4 text-emerald-600" />
+                    <span className="text-sm font-bold text-slate-900">12 emails</span>
+                  </div>
+                  <p className="text-xs text-slate-500">Captured this week</p>
                 </div>
               </div>
             </div>
