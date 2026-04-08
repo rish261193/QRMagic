@@ -1,26 +1,21 @@
 import { QrCode } from 'lucide-react';
 
-const footerLinks = {
-  Product: [
-    { label: 'Features', href: '#features' },
-    { label: 'Pricing', href: '#pricing' },
-    { label: 'Use Cases', href: '#features' },
-    { label: 'FAQ', href: '#faq' },
-  ],
-  Company: [
-    { label: 'About', href: '#' },
-    { label: 'Blog', href: '#' },
-    { label: 'Contact', href: '#' },
-    { label: 'Support', href: '#' },
-  ],
-  Legal: [
-    { label: 'Privacy', href: '#' },
-    { label: 'Terms', href: '#' },
-    { label: 'Security', href: '#' },
-  ],
+const productLinks: { label: string; sectionId: string }[] = [
+  { label: 'Features',  sectionId: 'features' },
+  { label: 'Pricing',   sectionId: 'pricing'  },
+  { label: 'Use Cases', sectionId: 'features' },
+  { label: 'FAQ',       sectionId: 'faq'      },
+];
+
+const otherLinks: Record<string, string[]> = {
+  Company: ['About', 'Blog', 'Contact', 'Support'],
+  Legal:   ['Privacy', 'Terms', 'Security'],
 };
 
 export default function Footer() {
+  const scrollTo = (id: string) =>
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+
   return (
     <footer className="bg-slate-50 border-t border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -35,17 +30,32 @@ export default function Footer() {
             </p>
           </div>
 
-          {Object.entries(footerLinks).map(([category, links]) => (
+          {/* Product — scroll links */}
+          <div>
+            <h3 className="font-semibold text-slate-900 mb-4">Product</h3>
+            <ul className="space-y-3">
+              {productLinks.map(({ label, sectionId }) => (
+                <li key={label}>
+                  <button
+                    onClick={() => scrollTo(sectionId)}
+                    className="text-slate-600 hover:text-slate-900 text-sm transition-colors"
+                  >
+                    {label}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Company + Legal — placeholder */}
+          {Object.entries(otherLinks).map(([category, links]) => (
             <div key={category}>
               <h3 className="font-semibold text-slate-900 mb-4">{category}</h3>
               <ul className="space-y-3">
-                {links.map((link) => (
-                  <li key={link.label}>
-                    <a
-                      href={link.href}
-                      className="text-slate-600 hover:text-slate-900 text-sm transition-colors"
-                    >
-                      {link.label}
+                {links.map((label) => (
+                  <li key={label}>
+                    <a href="#" className="text-slate-600 hover:text-slate-900 text-sm transition-colors">
+                      {label}
                     </a>
                   </li>
                 ))}

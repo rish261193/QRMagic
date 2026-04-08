@@ -1,4 +1,5 @@
 import { Repeat, Mail, Tag, FileText, TrendingUp } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const outcomes = [
   {
@@ -29,6 +30,8 @@ const outcomes = [
 ];
 
 export default function OutcomeSection() {
+  const navigate = useNavigate();
+
   return (
     <section className="py-24 sm:py-32 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -42,9 +45,10 @@ export default function OutcomeSection() {
           {outcomes.map((outcome, index) => {
             const Icon = outcome.icon;
             return (
-              <div
+              <button
                 key={index}
-                className="p-8 bg-slate-50 rounded-2xl border border-slate-200"
+                onClick={() => navigate('/create')}
+                className="p-8 bg-slate-50 rounded-2xl border border-slate-200 text-left cursor-pointer hover:border-slate-300 transition-all hover:shadow-lg"
               >
                 <div className="w-12 h-12 bg-slate-900 rounded-lg flex items-center justify-center mb-4">
                   <Icon className="w-6 h-6 text-white" />
@@ -55,7 +59,7 @@ export default function OutcomeSection() {
                 <p className="text-slate-600 leading-relaxed">
                   {outcome.description}
                 </p>
-              </div>
+              </button>
             );
           })}
         </div>

@@ -1,4 +1,5 @@
 import { Package, Store, Calendar, ShoppingBag, FileText } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const useCases = [
   {
@@ -29,6 +30,8 @@ const useCases = [
 ];
 
 export default function UseCases() {
+  const navigate = useNavigate();
+
   return (
     <section className="py-24 sm:py-32 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -45,9 +48,10 @@ export default function UseCases() {
           {useCases.map((useCase, index) => {
             const Icon = useCase.icon;
             return (
-              <div
+              <button
                 key={index}
-                className="p-6 bg-slate-50 rounded-xl border border-slate-200 text-center"
+                onClick={() => navigate('/create')}
+                className="p-6 bg-slate-50 rounded-xl border border-slate-200 text-center cursor-pointer hover:border-slate-300 transition-all hover:shadow-md"
               >
                 <div className="w-12 h-12 bg-white border border-slate-200 rounded-lg flex items-center justify-center mx-auto mb-4">
                   <Icon className="w-6 h-6 text-slate-900" />
@@ -58,7 +62,7 @@ export default function UseCases() {
                 <p className="text-sm text-slate-600 leading-relaxed">
                   {useCase.description}
                 </p>
-              </div>
+              </button>
             );
           })}
         </div>

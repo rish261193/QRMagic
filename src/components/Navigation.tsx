@@ -1,7 +1,9 @@
 import { QrCode, Menu, X } from 'lucide-react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Navigation() {
+  const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const scrollToSection = (id: string) => {
@@ -14,7 +16,7 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <button
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            onClick={() => navigate('/')}
             className="flex items-center gap-2"
           >
             <QrCode className="w-6 h-6 text-slate-900" />
@@ -34,8 +36,8 @@ export default function Navigation() {
           </div>
 
           <div className="flex items-center gap-4">
-            <button className="hidden md:block text-slate-700 hover:text-slate-900 font-medium transition-colors">
-              Sign in
+            <button disabled className="hidden md:block text-slate-400 font-medium cursor-not-allowed">
+              Sign in — coming soon
             </button>
             <button onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })} className="hidden md:block px-5 py-2 bg-slate-900 text-white rounded-lg font-medium hover:bg-slate-800 transition-colors">
               Get started
