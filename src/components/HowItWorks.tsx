@@ -20,12 +20,13 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section id="features" className="py-24 sm:py-32 bg-white">
+    <section id="features" className="py-16 sm:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
-            Simple. Powerful. Permanent.
+            How it works
           </h2>
+          <p className="text-xl text-slate-600">From URL to customer in 3 steps</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">

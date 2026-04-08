@@ -25,7 +25,7 @@ const steps = [
 
 export default function CustomerJourney() {
   return (
-    <section className="py-24 sm:py-32 bg-white">
+    <section className="py-16 sm:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
@@ -64,16 +64,7 @@ export default function CustomerJourney() {
           })}
         </div>
 
-        <div className="mt-16 bg-gradient-to-br from-slate-50 to-slate-100 rounded-2xl border border-slate-200 p-8 sm:p-12">
-          <div className="max-w-2xl">
-            <h3 className="text-2xl font-bold text-slate-900 mb-4">
-              That's the power of QRcraft.
-            </h3>
-            <p className="text-lg text-slate-700 leading-relaxed">
-              No complex integrations. No waiting for results. Just permanent QR codes that connect your physical marketing to real customer action. Every scan is an opportunity.
-            </p>
-          </div>
-        </div>
+
       </div>
     </section>
   );
