@@ -1,14 +1,25 @@
-import { QrCode } from 'lucide-react';
+import { QrCode, Menu, X } from 'lucide-react';
+import { useState } from 'react';
 
 export default function Navigation() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const scrollToSection = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    setMobileMenuOpen(false);
+  };
+
   return (
     <nav className="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md border-b border-slate-200 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <div className="flex items-center gap-2">
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="flex items-center gap-2"
+          >
             <QrCode className="w-6 h-6 text-slate-900" />
             <span className="text-xl font-bold text-slate-900">QRcraft</span>
-          </div>
+          </button>
 
           <div className="hidden md:flex items-center gap-8">
             <a href="#features" className="text-slate-700 hover:text-slate-900 font-medium transition-colors">
@@ -23,15 +34,37 @@ export default function Navigation() {
           </div>
 
           <div className="flex items-center gap-4">
-            <button className="text-slate-700 hover:text-slate-900 font-medium transition-colors">
+            <button className="hidden md:block text-slate-700 hover:text-slate-900 font-medium transition-colors">
               Sign in
             </button>
-            <button onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })} className="px-5 py-2 bg-slate-900 text-white rounded-lg font-medium hover:bg-slate-800 transition-colors">
+            <button onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })} className="hidden md:block px-5 py-2 bg-slate-900 text-white rounded-lg font-medium hover:bg-slate-800 transition-colors">
               Get started
+            </button>
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden p-2 text-slate-700 hover:text-slate-900"
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
         </div>
       </div>
+
+      {mobileMenuOpen && (
+        <div className="md:hidden border-t border-slate-200 bg-white/95 backdrop-blur-md">
+          <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-1">
+            <button onClick={() => scrollToSection('features')} className="text-left text-slate-700 hover:text-slate-900 font-medium py-2 transition-colors">
+              Features
+            </button>
+            <button onClick={() => scrollToSection('pricing')} className="text-left text-slate-700 hover:text-slate-900 font-medium py-2 transition-colors">
+              Pricing
+            </button>
+            <button onClick={() => scrollToSection('faq')} className="text-left text-slate-700 hover:text-slate-900 font-medium py-2 transition-colors">
+              FAQ
+            </button>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }
