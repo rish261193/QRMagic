@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { QRCodeCanvas } from 'qrcode.react';
-import { ArrowLeft, QrCode, Download } from 'lucide-react';
+import { ArrowLeft, QrCode, Download, Share2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 type StyleKey = 'classic' | 'brand' | 'bold';
@@ -23,6 +23,7 @@ export default function Create() {
   const [submittedUrl, setSubmittedUrl] = useState('');
   const [error, setError] = useState('');
   const [selectedStyle, setSelectedStyle] = useState<StyleKey>('brand');
+  const [copied, setCopied] = useState(false);
   const canvasRef = useRef<HTMLDivElement>(null);
 
   const step = submittedUrl ? 2 : 1;
@@ -35,6 +36,13 @@ export default function Create() {
     }
     setError('');
     setSubmittedUrl(trimmed);
+  }
+
+  function handleShare() {
+    navigator.clipboard.writeText('https://qr-magic-bice.vercel.app').then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
   }
 
   function handleDownload() {
@@ -155,10 +163,39 @@ export default function Create() {
                 Download PNG
               </button>
 
-              <p className="text-sm text-slate-400">
-                Want to track scans?{' '}
-                <span className="text-teal-600 font-medium cursor-default">Save this QR →</span>
-              </p>
+              {/* What's next */}
+              <div className="mt-4 pt-4 border-t border-slate-100 text-left space-y-3">
+                <p className="text-xs text-slate-400 uppercase tracking-wide font-medium mb-3">What's next?</p>
+
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-slate-500">Save &amp; track this QR</span>
+                  <span className="text-xs bg-slate-100 text-slate-400 px-2 py-0.5 rounded-full font-medium">Sign in coming soon</span>
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-slate-500">Upgrade to edit destination anytime</span>
+                  <a
+                    href="/#pricing"
+                    className="text-xs text-teal-600 font-medium hover:text-teal-700 transition-colors"
+                  >
+                    See plans →
+                  </a>
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-slate-500">Share QRcraft with someone</span>
+                  <button
+                    onClick={handleShare}
+                    className="flex items-center gap-1 text-xs text-teal-600 font-medium hover:text-teal-700 transition-colors"
+                  >
+                    {copied ? (
+                      <span className="text-emerald-600">Copied!</span>
+                    ) : (
+                      <><Share2 className="w-3 h-3" />Copy link</>
+                    )}
+                  </button>
+                </div>
+              </div>
             </div>
 
             {/* Back / start over */}

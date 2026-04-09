@@ -64,6 +64,14 @@ export default function Navigation() {
             <button onClick={() => scrollToSection('faq')} className="text-left text-slate-700 hover:text-slate-900 font-medium py-2 transition-colors">
               FAQ
             </button>
+            <div className="pt-2 mt-1 border-t border-slate-100">
+              <button
+                onClick={() => { navigate('/create'); setMobileMenuOpen(false); }}
+                className="w-full py-3 bg-slate-900 text-white rounded-lg font-semibold text-sm hover:bg-slate-800 transition-colors"
+              >
+                Create free QR
+              </button>
+            </div>
           </div>
         </div>
       )}
