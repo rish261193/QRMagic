@@ -66,10 +66,11 @@ export default function Hero() {
 
           {/* Right column — QR card */}
           <div className="flex justify-center lg:justify-end">
-            <div className="bg-white rounded-3xl shadow-2xl shadow-slate-900/10 border border-slate-100 p-6 w-80">
+            <div className="bg-white rounded-3xl shadow-2xl shadow-slate-900/10 border border-slate-100 p-4 w-72 max-h-[500px] overflow-hidden">
 
               {/* QR wrapper with animation */}
               <div className="relative mb-4">
+                <div className="max-w-[180px] mx-auto">
 
                 {/* Styled QR underneath */}
                 <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto rounded-xl">
@@ -289,6 +290,7 @@ export default function Hero() {
                   <rect x="17" y="20" width="2" height="1" fill="#0f172a"/>
                   <rect x="20" y="20" width="1" height="1" fill="#0f172a"/>
                 </svg>
+                </div>{/* end max-w-[180px] */}
               </div>
 
               {/* Style picker */}

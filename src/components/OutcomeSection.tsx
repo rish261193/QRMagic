@@ -48,7 +48,7 @@ export default function OutcomeSection() {
               <button
                 key={index}
                 onClick={() => navigate('/create')}
-                className="p-6 bg-slate-50 rounded-2xl border border-slate-200 text-left cursor-pointer hover:border-slate-300 transition-all hover:shadow-lg"
+                className={`p-6 bg-slate-50 rounded-2xl border border-slate-200 text-left cursor-pointer hover:border-slate-300 transition-all hover:shadow-lg${index === outcomes.length - 1 ? ' lg:col-start-2' : ''}`}
               >
                 <div className="w-12 h-12 bg-slate-900 rounded-lg flex items-center justify-center mb-4">
                   <Icon className="w-6 h-6 text-white" />
