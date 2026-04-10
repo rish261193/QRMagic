@@ -39,3 +39,12 @@ export async function renameQR(id: string, name: string) {
     .eq('id', id);
   return { error };
 }
+
+export async function getQRUrl(id: string): Promise<string | null> {
+  const { data } = await supabase.rpc('get_qr_url', { qr_id: id });
+  return data as string | null;
+}
+
+export async function trackScan(id: string) {
+  await supabase.rpc('increment_scan', { qr_id: id });
+}

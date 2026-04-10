@@ -28,6 +28,8 @@ function QRCard({
   const [saving, setSaving] = useState(false);
   const [copied, setCopied] = useState(false);
 
+  const redirectUrl = `${window.location.origin}/r/${qr.id}`;
+
   function download() {
     const canvas = wrapperRef.current?.querySelector('canvas') as HTMLCanvasElement | null;
     if (!canvas) return;
@@ -61,7 +63,7 @@ function QRCard({
     <div className="bg-white rounded-2xl border border-slate-100 p-5 flex flex-col">
       <div ref={wrapperRef} className="flex justify-center mb-4">
         <QRCodeCanvas
-          value={qr.url}
+          value={redirectUrl}
           size={140}
           fgColor={styleColors[qr.style] ?? '#0f172a'}
           bgColor="#ffffff"

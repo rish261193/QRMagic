@@ -13,6 +13,8 @@ import Footer from './components/Footer';
 import Create from './pages/Create';
 import Auth from './pages/Auth';
 import Dashboard from './pages/Dashboard';
+import Redirect from './pages/Redirect';
+import NotFound from './pages/NotFound';
 
 function LandingPage() {
   return (
@@ -40,6 +42,8 @@ function App() {
           <Route path="/create" element={<Create />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/r/:id" element={<Redirect />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>

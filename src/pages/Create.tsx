@@ -38,6 +38,7 @@ export default function Create() {
   const [copied, setCopied] = useState(false);
   const [qrName, setQrName] = useState('');
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
+  const [savedId, setSavedId] = useState<string | null>(null);
   const canvasRef = useRef<HTMLDivElement>(null);
 
   // Auto-populate name when URL is submitted
@@ -47,6 +48,11 @@ export default function Create() {
 
   const step = submittedUrl ? 2 : 1;
 
+  // After save, the QR encodes the redirect URL so scans are tracked
+  const qrValue = savedId
+    ? `${window.location.origin}/r/${savedId}`
+    : submittedUrl;
+
   function handleGenerate() {
     const trimmed = url.trim();
     if (!trimmed.match(/^https?:\/\/.+/)) {
@@ -55,6 +61,7 @@ export default function Create() {
     }
     setError('');
     setSaveStatus('idle');
+    setSavedId(null);
     setSubmittedUrl(trimmed);
   }
 
@@ -77,13 +84,18 @@ export default function Create() {
   async function handleSave() {
     if (!user) return;
     setSaveStatus('saving');
-    const { error } = await saveQR({
+    const { data, error } = await saveQR({
       name: qrName.trim() || nameFromUrl(submittedUrl),
       url: submittedUrl,
       style: selectedStyle,
       user_id: user.id,
     });
-    setSaveStatus(error ? 'error' : 'saved');
+    if (!error && data) {
+      setSavedId(data.id);
+      setSaveStatus('saved');
+    } else {
+      setSaveStatus('error');
+    }
   }
 
   const style = QR_STYLES[selectedStyle];
@@ -154,7 +166,7 @@ export default function Create() {
             <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-8 mb-6">
               <div ref={canvasRef} className="flex justify-center mb-8">
                 <QRCodeCanvas
-                  value={submittedUrl}
+                  value={qrValue}
                   size={220}
                   fgColor={style.fgColor}
                   bgColor={style.bgColor}
@@ -170,7 +182,7 @@ export default function Create() {
                   {(Object.entries(QR_STYLES) as [StyleKey, QRStyle][]).map(([key, s]) => (
                     <button
                       key={key}
-                      onClick={() => { setSelectedStyle(key); setSaveStatus('idle'); }}
+                      onClick={() => { setSelectedStyle(key); if (saveStatus !== 'saved') setSaveStatus('idle'); }}
                       className={`flex-1 flex flex-col items-center gap-2 p-3 rounded-xl border-2 transition-all ${
                         selectedStyle === key
                           ? 'border-teal-500 bg-teal-50'
@@ -192,7 +204,7 @@ export default function Create() {
                 className="w-full flex items-center justify-center gap-2 py-3.5 bg-slate-900 text-white rounded-lg font-semibold text-base hover:bg-slate-800 transition-colors mb-4"
               >
                 <Download className="w-4 h-4" />
-                Download PNG
+                {savedId ? 'Download trackable QR' : 'Download PNG'}
               </button>
 
               {/* Save section */}
@@ -202,7 +214,7 @@ export default function Create() {
                     <div className="space-y-3">
                       <div className="flex items-center justify-center gap-2 py-2.5 bg-emerald-50 text-emerald-700 rounded-lg text-sm font-semibold border border-emerald-200">
                         <Check className="w-4 h-4" />
-                        Saved to your dashboard
+                        Saved — scan tracking is live
                       </div>
                       <button
                         onClick={() => navigate('/dashboard')}
@@ -228,13 +240,13 @@ export default function Create() {
                         disabled={saveStatus === 'saving'}
                         className="w-full py-2.5 bg-teal-600 text-white rounded-lg font-semibold text-sm hover:bg-teal-700 disabled:opacity-60 transition-colors"
                       >
-                        {saveStatus === 'saving' ? 'Saving…' : saveStatus === 'error' ? 'Save failed — try again' : 'Save this QR'}
+                        {saveStatus === 'saving' ? 'Saving…' : saveStatus === 'error' ? 'Save failed — try again' : 'Save & enable scan tracking'}
                       </button>
                     </div>
                   )
                 ) : (
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-slate-500">Save &amp; track this QR</span>
+                    <span className="text-sm text-slate-500">Save &amp; track scans</span>
                     <button
                       onClick={() => navigate('/auth')}
                       className="text-xs text-teal-600 font-medium hover:text-teal-700 transition-colors"
@@ -266,7 +278,7 @@ export default function Create() {
             </div>
 
             <button
-              onClick={() => { setSubmittedUrl(''); setUrl(''); setSaveStatus('idle'); }}
+              onClick={() => { setSubmittedUrl(''); setUrl(''); setSaveStatus('idle'); setSavedId(null); }}
               className="text-sm text-slate-400 hover:text-slate-600 transition-colors"
             >
               ← Create another
