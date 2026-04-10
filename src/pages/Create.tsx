@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import { QRCodeCanvas } from 'qrcode.react';
 import { ArrowLeft, QrCode, Download, Share2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 type StyleKey = 'classic' | 'brand' | 'bold';
 
@@ -19,6 +20,7 @@ const QR_STYLES: Record<StyleKey, QRStyle> = {
 
 export default function Create() {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [url, setUrl] = useState('');
   const [submittedUrl, setSubmittedUrl] = useState('');
   const [error, setError] = useState('');
@@ -167,10 +169,24 @@ export default function Create() {
               <div className="mt-4 pt-4 border-t border-slate-100 text-left space-y-3">
                 <p className="text-xs text-slate-400 uppercase tracking-wide font-medium mb-3">What's next?</p>
 
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-slate-500">Save &amp; track this QR</span>
-                  <span className="text-xs bg-slate-100 text-slate-400 px-2 py-0.5 rounded-full font-medium">Sign in coming soon</span>
-                </div>
+                {user ? (
+                  <button
+                    onClick={() => {/* wire to DB next session */}}
+                    className="w-full py-2.5 bg-teal-600 text-white rounded-lg font-semibold text-sm hover:bg-teal-700 transition-colors mb-1"
+                  >
+                    Save this QR
+                  </button>
+                ) : (
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-slate-500">Save &amp; track this QR</span>
+                    <button
+                      onClick={() => navigate('/auth')}
+                      className="text-xs text-teal-600 font-medium hover:text-teal-700 transition-colors"
+                    >
+                      Sign in to save →
+                    </button>
+                  </div>
+                )}
 
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-slate-500">Upgrade to edit destination anytime</span>

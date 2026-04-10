@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
 import CustomerJourney from './components/CustomerJourney';
@@ -10,6 +11,8 @@ import FAQ from './components/FAQ';
 import CTA from './components/CTA';
 import Footer from './components/Footer';
 import Create from './pages/Create';
+import Auth from './pages/Auth';
+import Dashboard from './pages/Dashboard';
 
 function LandingPage() {
   return (
@@ -31,10 +34,14 @@ function LandingPage() {
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/create" element={<Create />} />
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/create" element={<Create />} />
+          <Route path="/auth" element={<Auth />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
   );
 }
