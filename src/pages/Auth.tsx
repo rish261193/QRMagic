@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { QrCode } from 'lucide-react';
+import { QrCode, Loader2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { signIn, signUp } from '../lib/auth';
 import { useAuth } from '../context/AuthContext';
@@ -17,7 +17,6 @@ export default function Auth() {
   const [info, setInfo] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
-  // Already logged in — bounce to dashboard
   useEffect(() => {
     if (!loading && user) navigate('/dashboard');
   }, [user, loading, navigate]);
@@ -51,44 +50,40 @@ export default function Auth() {
   if (loading) return null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white flex flex-col">
+    <div className="min-h-screen bg-slate-900 flex flex-col">
       {/* Header */}
       <header className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between">
-        <button
-          onClick={() => navigate('/')}
-          className="flex items-center gap-2"
-        >
-          <QrCode className="w-5 h-5 text-teal-600" />
-          <span className="font-bold text-slate-900 text-lg">QRcraft</span>
+        <button onClick={() => navigate('/')} className="flex items-center gap-2">
+          <QrCode className="w-5 h-5 text-teal-400" />
+          <span className="font-bold text-white text-lg">QRcraft</span>
         </button>
       </header>
 
-      {/* Form */}
       <main className="flex-1 flex items-center justify-center px-4 py-12">
         <div className="w-full max-w-md">
+          {/* Heading */}
           <div className="text-center mb-8">
-            <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-2 tracking-tight">
+            <h1 className="text-3xl sm:text-4xl font-bold text-white mb-2 tracking-tight">
               {mode === 'signin' ? 'Welcome back' : 'Create your account'}
             </h1>
-            <p className="text-slate-500 text-base">
+            <p className="text-slate-400 text-base">
               {mode === 'signin'
                 ? 'Sign in to access your saved QR codes'
                 : 'Free forever. Save and track your QR codes.'}
             </p>
           </div>
 
-          <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
+          {/* Card */}
+          <div className="bg-slate-800 rounded-2xl border border-slate-700 p-8">
             {info && (
-              <div className="mb-5 px-4 py-3 bg-emerald-50 border border-emerald-200 rounded-lg text-sm text-emerald-800">
+              <div className="mb-5 px-4 py-3 bg-emerald-900/50 border border-emerald-700 rounded-lg text-sm text-emerald-300">
                 {info}
               </div>
             )}
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1.5">
-                  Email
-                </label>
+                <label className="block text-sm font-medium text-slate-300 mb-1.5">Email</label>
                 <input
                   type="email"
                   value={email}
@@ -96,14 +91,12 @@ export default function Auth() {
                   placeholder="you@example.com"
                   required
                   autoFocus
-                  className="w-full px-4 py-3 rounded-lg border border-slate-200 text-slate-900 placeholder-slate-400 text-base focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition"
+                  className="w-full px-4 py-3 rounded-lg bg-slate-700 border border-slate-600 text-white placeholder-slate-500 text-base focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1.5">
-                  Password
-                </label>
+                <label className="block text-sm font-medium text-slate-300 mb-1.5">Password</label>
                 <input
                   type="password"
                   value={password}
@@ -111,35 +104,34 @@ export default function Auth() {
                   placeholder="••••••••"
                   required
                   minLength={6}
-                  className="w-full px-4 py-3 rounded-lg border border-slate-200 text-slate-900 placeholder-slate-400 text-base focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition"
+                  className="w-full px-4 py-3 rounded-lg bg-slate-700 border border-slate-600 text-white placeholder-slate-500 text-base focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition"
                 />
               </div>
 
               {error && (
-                <p className="text-sm text-red-500">{error}</p>
+                <p className="text-sm text-red-400 bg-red-900/30 border border-red-800 rounded-lg px-3 py-2">{error}</p>
               )}
 
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full py-3.5 bg-slate-900 text-white rounded-lg font-semibold text-base hover:bg-slate-800 disabled:opacity-60 disabled:cursor-not-allowed transition-colors mt-2"
+                className="w-full flex items-center justify-center gap-2 py-3.5 bg-teal-600 text-white rounded-lg font-semibold text-base hover:bg-teal-500 disabled:opacity-60 disabled:cursor-not-allowed transition-colors mt-2"
               >
-                {submitting
-                  ? 'Please wait…'
-                  : mode === 'signin' ? 'Sign in' : 'Create account'}
+                {submitting && <Loader2 className="w-4 h-4 animate-spin" />}
+                {submitting ? 'Please wait…' : mode === 'signin' ? 'Sign in' : 'Create account'}
               </button>
             </form>
 
-            <p className="mt-6 text-center text-sm text-slate-500">
+            <p className="mt-6 text-center text-sm text-slate-400">
               {mode === 'signin' ? (
                 <>No account?{' '}
-                  <button onClick={() => { setMode('signup'); setError(''); setInfo(''); }} className="text-teal-600 font-medium hover:text-teal-700 transition-colors">
+                  <button onClick={() => { setMode('signup'); setError(''); setInfo(''); }} className="text-teal-400 font-medium hover:text-teal-300 transition-colors">
                     Sign up free
                   </button>
                 </>
               ) : (
                 <>Already have an account?{' '}
-                  <button onClick={() => { setMode('signin'); setError(''); setInfo(''); }} className="text-teal-600 font-medium hover:text-teal-700 transition-colors">
+                  <button onClick={() => { setMode('signin'); setError(''); setInfo(''); }} className="text-teal-400 font-medium hover:text-teal-300 transition-colors">
                     Sign in
                   </button>
                 </>

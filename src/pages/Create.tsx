@@ -1,8 +1,9 @@
 import { useState, useRef } from 'react';
 import { QRCodeCanvas } from 'qrcode.react';
-import { ArrowLeft, QrCode, Download, Share2 } from 'lucide-react';
+import { ArrowLeft, QrCode, Download, Share2, Check } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { saveQR } from '../lib/qr';
 
 type StyleKey = 'classic' | 'brand' | 'bold';
 
@@ -18,6 +19,15 @@ const QR_STYLES: Record<StyleKey, QRStyle> = {
   bold:    { label: 'Bold',    fgColor: '#dc2626', bgColor: '#ffffff' },
 };
 
+function nameFromUrl(url: string): string {
+  try {
+    const host = new URL(url).hostname.replace(/^www\./, '');
+    return `QR for ${host}`;
+  } catch {
+    return 'My QR code';
+  }
+}
+
 export default function Create() {
   const navigate = useNavigate();
   const { user } = useAuth();
@@ -26,6 +36,7 @@ export default function Create() {
   const [error, setError] = useState('');
   const [selectedStyle, setSelectedStyle] = useState<StyleKey>('brand');
   const [copied, setCopied] = useState(false);
+  const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
   const canvasRef = useRef<HTMLDivElement>(null);
 
   const step = submittedUrl ? 2 : 1;
@@ -37,6 +48,7 @@ export default function Create() {
       return;
     }
     setError('');
+    setSaveStatus('idle');
     setSubmittedUrl(trimmed);
   }
 
@@ -50,11 +62,25 @@ export default function Create() {
   function handleDownload() {
     const canvas = canvasRef.current?.querySelector('canvas') as HTMLCanvasElement | null;
     if (!canvas) return;
-    const dataUrl = canvas.toDataURL('image/png');
     const a = document.createElement('a');
-    a.href = dataUrl;
+    a.href = canvas.toDataURL('image/png');
     a.download = 'qrcode.png';
     a.click();
+  }
+
+  async function handleSave() {
+    if (!user) return;
+    setSaveStatus('saving');
+    const { error } = await saveQR({
+      name: nameFromUrl(submittedUrl),
+      url: submittedUrl,
+      style: selectedStyle,
+    });
+    if (error) {
+      setSaveStatus('error');
+    } else {
+      setSaveStatus('saved');
+    }
   }
 
   const style = QR_STYLES[selectedStyle];
@@ -78,7 +104,6 @@ export default function Create() {
 
       <main className="max-w-lg mx-auto px-4 sm:px-6 py-16 sm:py-24">
         {step === 1 ? (
-          /* ── Step 1: URL input ── */
           <div className="text-center">
             <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-3 tracking-tight">
               Create your QR code
@@ -109,14 +134,12 @@ export default function Create() {
             </div>
           </div>
         ) : (
-          /* ── Step 2: Preview + style picker ── */
           <div className="text-center">
             <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-2 tracking-tight">
               Your QR code is ready
             </h1>
             <p className="text-slate-500 mb-10 text-sm truncate px-4">{submittedUrl}</p>
 
-            {/* QR preview */}
             <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-8 mb-6">
               <div ref={canvasRef} className="flex justify-center mb-8">
                 <QRCodeCanvas
@@ -136,18 +159,14 @@ export default function Create() {
                   {(Object.entries(QR_STYLES) as [StyleKey, QRStyle][]).map(([key, s]) => (
                     <button
                       key={key}
-                      onClick={() => setSelectedStyle(key)}
+                      onClick={() => { setSelectedStyle(key); setSaveStatus('idle'); }}
                       className={`flex-1 flex flex-col items-center gap-2 p-3 rounded-xl border-2 transition-all ${
                         selectedStyle === key
                           ? 'border-teal-500 bg-teal-50'
                           : 'border-slate-200 hover:border-slate-300 bg-white'
                       }`}
                     >
-                      {/* Mini QR preview swatch */}
-                      <div
-                        className="w-8 h-8 rounded-sm"
-                        style={{ backgroundColor: s.fgColor }}
-                      />
+                      <div className="w-8 h-8 rounded-sm" style={{ backgroundColor: s.fgColor }} />
                       <span className={`text-xs font-medium ${selectedStyle === key ? 'text-teal-600' : 'text-slate-500'}`}>
                         {s.label}
                       </span>
@@ -170,12 +189,20 @@ export default function Create() {
                 <p className="text-xs text-slate-400 uppercase tracking-wide font-medium mb-3">What's next?</p>
 
                 {user ? (
-                  <button
-                    onClick={() => {/* wire to DB next session */}}
-                    className="w-full py-2.5 bg-teal-600 text-white rounded-lg font-semibold text-sm hover:bg-teal-700 transition-colors mb-1"
-                  >
-                    Save this QR
-                  </button>
+                  saveStatus === 'saved' ? (
+                    <div className="w-full flex items-center justify-center gap-2 py-2.5 bg-emerald-50 text-emerald-700 rounded-lg text-sm font-semibold border border-emerald-200">
+                      <Check className="w-4 h-4" />
+                      QR saved to your dashboard
+                    </div>
+                  ) : (
+                    <button
+                      onClick={handleSave}
+                      disabled={saveStatus === 'saving'}
+                      className="w-full py-2.5 bg-teal-600 text-white rounded-lg font-semibold text-sm hover:bg-teal-700 disabled:opacity-60 transition-colors"
+                    >
+                      {saveStatus === 'saving' ? 'Saving…' : saveStatus === 'error' ? 'Save failed — try again' : 'Save this QR'}
+                    </button>
+                  )
                 ) : (
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-slate-500">Save &amp; track this QR</span>
@@ -190,10 +217,7 @@ export default function Create() {
 
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-slate-500">Upgrade to edit destination anytime</span>
-                  <a
-                    href="/#pricing"
-                    className="text-xs text-teal-600 font-medium hover:text-teal-700 transition-colors"
-                  >
+                  <a href="/#pricing" className="text-xs text-teal-600 font-medium hover:text-teal-700 transition-colors">
                     See plans →
                   </a>
                 </div>
@@ -214,9 +238,8 @@ export default function Create() {
               </div>
             </div>
 
-            {/* Back / start over */}
             <button
-              onClick={() => { setSubmittedUrl(''); setUrl(''); }}
+              onClick={() => { setSubmittedUrl(''); setUrl(''); setSaveStatus('idle'); }}
               className="text-sm text-slate-400 hover:text-slate-600 transition-colors"
             >
               ← Start over

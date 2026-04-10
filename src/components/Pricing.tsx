@@ -1,4 +1,5 @@
 import { Check } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const plans = [
   {
@@ -13,7 +14,8 @@ const plans = [
       'Print and forget'
     ],
     cta: 'Start free',
-    highlighted: false
+    highlighted: false,
+    action: 'create' as const,
   },
   {
     name: 'Editable QR Kit',
@@ -28,7 +30,8 @@ const plans = [
       'Lifetime access'
     ],
     cta: 'Buy once',
-    highlighted: true
+    highlighted: true,
+    action: 'auth' as const,
   },
   {
     name: 'Growth',
@@ -44,11 +47,14 @@ const plans = [
       'Priority support'
     ],
     cta: 'Start trial',
-    highlighted: false
+    highlighted: false,
+    action: 'auth' as const,
   }
 ];
 
 export default function Pricing() {
+  const navigate = useNavigate();
+
   return (
     <section id="pricing" className="py-12 sm:py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -78,38 +84,24 @@ export default function Pricing() {
               )}
 
               <div className="mb-6">
-                <h3
-                  className={`text-xl font-semibold mb-2 ${
-                    plan.highlighted ? 'text-white' : 'text-slate-900'
-                  }`}
-                >
+                <h3 className={`text-xl font-semibold mb-2 ${plan.highlighted ? 'text-white' : 'text-slate-900'}`}>
                   {plan.name}
                 </h3>
                 <div className="flex items-baseline gap-2">
-                  <span
-                    className={`text-5xl font-bold ${
-                      plan.highlighted ? 'text-white' : 'text-slate-900'
-                    }`}
-                  >
+                  <span className={`text-5xl font-bold ${plan.highlighted ? 'text-white' : 'text-slate-900'}`}>
                     {plan.price}
                   </span>
-                  <span
-                    className={plan.highlighted ? 'text-slate-300' : 'text-slate-600'}
-                  >
+                  <span className={plan.highlighted ? 'text-slate-300' : 'text-slate-600'}>
                     {plan.period}
                   </span>
                 </div>
-                <p
-                  className={`mt-4 ${
-                    plan.highlighted ? 'text-slate-300' : 'text-slate-600'
-                  }`}
-                >
+                <p className={`mt-4 ${plan.highlighted ? 'text-slate-300' : 'text-slate-600'}`}>
                   {plan.description}
                 </p>
               </div>
 
               <button
-                onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => navigate(plan.action === 'create' ? '/create' : '/auth')}
                 className={`w-full py-3 px-6 rounded-lg font-semibold mb-8 transition-colors ${
                   plan.highlighted
                     ? 'bg-white text-slate-900 hover:bg-slate-100'
@@ -120,16 +112,10 @@ export default function Pricing() {
               </button>
 
               <ul className="space-y-4">
-                {plan.features.map((feature, featureIndex) => (
-                  <li key={featureIndex} className="flex items-start gap-3">
-                    <Check
-                      className={`w-5 h-5 flex-shrink-0 mt-0.5 ${
-                        plan.highlighted ? 'text-emerald-400' : 'text-emerald-600'
-                      }`}
-                    />
-                    <span
-                      className={plan.highlighted ? 'text-slate-100' : 'text-slate-700'}
-                    >
+                {plan.features.map((feature, fi) => (
+                  <li key={fi} className="flex items-start gap-3">
+                    <Check className={`w-5 h-5 flex-shrink-0 mt-0.5 ${plan.highlighted ? 'text-emerald-400' : 'text-emerald-600'}`} />
+                    <span className={plan.highlighted ? 'text-slate-100' : 'text-slate-700'}>
                       {feature}
                     </span>
                   </li>
