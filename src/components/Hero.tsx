@@ -4,40 +4,40 @@ import { useNavigate } from 'react-router-dom';
 export default function Hero() {
   const navigate = useNavigate();
   return (
-    <section className="relative overflow-hidden bg-white border-b-2 border-slate-200">
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-emerald-50/30 pointer-events-none" />
+    <section className="relative overflow-hidden bg-slate-900">
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-800 via-slate-900 to-teal-950 pointer-events-none" />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 pb-32">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
           {/* Left column */}
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
 
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-50 border border-emerald-200 rounded-full mb-6">
-              <QrCode className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-              <span className="text-sm font-semibold text-emerald-800 tracking-tight">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-900/50 border border-emerald-700 rounded-full mb-6">
+              <QrCode className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+              <span className="text-sm font-semibold text-emerald-300 tracking-tight">
                 Free QR codes that never expire
               </span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 leading-[1.08] mb-5">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.08] mb-5">
               Turn every QR scan into a customer
             </h1>
 
-            <p className="text-base sm:text-lg text-slate-500 leading-relaxed mb-8 max-w-lg">
+            <p className="text-base sm:text-lg text-slate-300 leading-relaxed mb-8 max-w-lg">
               Create permanent QR codes for free. Upgrade when you want to track scans, capture emails, and drive repeat sales.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 mb-8 w-full sm:w-auto">
               <button
                 onClick={() => navigate('/create')}
-                className="px-7 py-3.5 bg-slate-900 text-white rounded-xl font-semibold text-base hover:bg-slate-800 transition-colors"
+                className="px-7 py-3.5 bg-emerald-500 text-white rounded-xl font-semibold text-base hover:bg-emerald-400 transition-colors"
               >
                 Create free QR
               </button>
               <button
                 onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
-                className="px-7 py-3.5 bg-white text-slate-700 border border-slate-200 rounded-xl font-semibold text-base hover:border-slate-300 hover:bg-slate-50 transition-colors"
+                className="px-7 py-3.5 bg-transparent text-white border border-slate-600 rounded-xl font-semibold text-base hover:bg-slate-800 transition-colors"
               >
                 See how it works
               </button>
@@ -50,8 +50,8 @@ export default function Hero() {
                 'Works after printing',
                 'Upgrade only for growth tools',
               ].map((item, i) => (
-                <div key={i} className="flex items-center gap-2 text-slate-600 text-sm">
-                  <Check className="w-4 h-4 text-emerald-500 flex-shrink-0" />
+                <div key={i} className="flex items-center gap-2 text-slate-300 text-sm">
+                  <Check className="w-4 h-4 text-emerald-400 flex-shrink-0" />
                   <span>{item}</span>
                 </div>
               ))}
@@ -60,7 +60,7 @@ export default function Hero() {
 
           {/* Right column — QR card */}
           <div className="flex justify-center lg:justify-end">
-            <div className="bg-white rounded-2xl shadow-xl shadow-slate-900/8 border border-slate-100 p-5 w-64">
+            <div className="bg-white rounded-2xl shadow-2xl p-5 w-64">
 
               <div className="relative mb-3">
                 <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto rounded-lg">
@@ -364,12 +364,10 @@ export default function Hero() {
                 </div>
               </div>
 
-              {/* Scan me button */}
               <button className="w-full py-2.5 mb-3 text-sm font-semibold bg-gradient-to-r from-slate-900 to-teal-700 text-white rounded-lg hover:opacity-90 transition-opacity">
                 Scan me →
               </button>
 
-              {/* Stats */}
               <div className="grid grid-cols-2 gap-2">
                 <div className="bg-slate-50 rounded-lg px-3 py-2.5 border border-slate-100">
                   <div className="flex items-center gap-1.5 mb-0.5">
