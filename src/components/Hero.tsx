@@ -7,7 +7,7 @@ export default function Hero() {
     <section className="relative overflow-hidden bg-slate-900">
       <div className="absolute inset-0 bg-gradient-to-br from-slate-800 via-slate-900 to-teal-950 pointer-events-none" />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 pb-32">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
           {/* Left column */}
