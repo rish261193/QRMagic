@@ -1,6 +1,9 @@
 import { Check } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
+const KIT_LINK  = import.meta.env.VITE_STRIPE_KIT_LINK  as string | undefined;
+const GROWTH_LINK = import.meta.env.VITE_STRIPE_GROWTH_LINK as string | undefined;
+
 const plans = [
   {
     name: 'Free',
@@ -10,12 +13,14 @@ const plans = [
     features: [
       'Permanent QR codes',
       'Basic destination linking',
+      'Scan count tracking',
       'Never expires',
       'Print and forget'
     ],
     cta: 'Start free',
     highlighted: false,
-    action: 'create' as const,
+    stripeLink: undefined as string | undefined,
+    fallback: 'create' as const,
   },
   {
     name: 'Editable QR Kit',
@@ -31,7 +36,8 @@ const plans = [
     ],
     cta: 'Buy once',
     highlighted: true,
-    action: 'auth' as const,
+    stripeLink: KIT_LINK,
+    fallback: 'auth' as const,
   },
   {
     name: 'Growth',
@@ -40,7 +46,7 @@ const plans = [
     description: 'Scale your customer acquisition',
     features: [
       'Everything in Editable',
-      'Scan analytics & tracking',
+      'Advanced scan analytics',
       'Email capture forms',
       'Custom landing pages',
       'Conversion tracking',
@@ -48,12 +54,21 @@ const plans = [
     ],
     cta: 'Start trial',
     highlighted: false,
-    action: 'auth' as const,
+    stripeLink: GROWTH_LINK,
+    fallback: 'auth' as const,
   }
 ];
 
 export default function Pricing() {
   const navigate = useNavigate();
+
+  function handleCta(plan: typeof plans[0]) {
+    if (plan.stripeLink) {
+      window.open(plan.stripeLink, '_blank', 'noopener,noreferrer');
+    } else {
+      navigate(plan.fallback === 'create' ? '/create' : '/auth');
+    }
+  }
 
   return (
     <section id="pricing" className="py-12 sm:py-16 bg-white">
@@ -101,7 +116,7 @@ export default function Pricing() {
               </div>
 
               <button
-                onClick={() => navigate(plan.action === 'create' ? '/create' : '/auth')}
+                onClick={() => handleCta(plan)}
                 className={`w-full py-3 px-6 rounded-lg font-semibold mb-8 transition-colors ${
                   plan.highlighted
                     ? 'bg-white text-slate-900 hover:bg-slate-100'

@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { QRCodeCanvas } from 'qrcode.react';
-import { QrCode, Plus, LogOut, Download, Trash2, Loader2, Pencil, Check, Copy } from 'lucide-react';
+import { QrCode, Plus, LogOut, Download, Trash2, Loader2, Pencil, Check, Copy, Lock, Zap } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { signOut } from '../lib/auth';
-import { fetchQRs, deleteQR, renameQR, type QRCode as QRCodeType } from '../lib/qr';
+import { fetchQRs, deleteQR, renameQR, updateQRUrl, type QRCode as QRCodeType } from '../lib/qr';
+import { ensureProfile, type Plan } from '../lib/profile';
 
 const styleColors: Record<string, string> = {
   classic: '#0f172a',
@@ -14,12 +15,16 @@ const styleColors: Record<string, string> = {
 
 function QRCard({
   qr,
+  isPro,
   onDelete,
   onRename,
+  onUpdateUrl,
 }: {
   qr: QRCodeType;
+  isPro: boolean;
   onDelete: (id: string) => void;
   onRename: (id: string, name: string) => void;
+  onUpdateUrl: (id: string, url: string) => void;
 }) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [deleting, setDeleting] = useState(false);
@@ -27,6 +32,10 @@ function QRCard({
   const [editName, setEditName] = useState(qr.name);
   const [saving, setSaving] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [editingUrl, setEditingUrl] = useState(false);
+  const [editUrl, setEditUrl] = useState(qr.url);
+  const [savingUrl, setSavingUrl] = useState(false);
+  const [urlError, setUrlError] = useState('');
 
   const redirectUrl = `${window.location.origin}/r/${qr.id}`;
 
@@ -50,6 +59,17 @@ function QRCard({
     await onRename(qr.id, editName.trim());
     setSaving(false);
     setEditing(false);
+  }
+
+  async function handleUpdateUrl() {
+    const trimmed = editUrl.trim();
+    if (!trimmed || trimmed === qr.url) { setEditingUrl(false); return; }
+    if (!trimmed.match(/^https?:\/\/.+/)) { setUrlError('Must start with http:// or https://'); return; }
+    setUrlError('');
+    setSavingUrl(true);
+    await onUpdateUrl(qr.id, trimmed);
+    setSavingUrl(false);
+    setEditingUrl(false);
   }
 
   function copyUrl() {
@@ -97,13 +117,45 @@ function QRCard({
         )}
       </div>
 
-      {/* URL */}
-      <div className="flex items-center gap-1 mb-2 min-w-0">
-        <p className="text-xs text-slate-400 truncate flex-1">{qr.url}</p>
-        <button onClick={copyUrl} className="shrink-0 text-slate-300 hover:text-slate-600 transition-colors" title="Copy URL">
-          {copied ? <Check className="w-3 h-3 text-emerald-500" /> : <Copy className="w-3 h-3" />}
-        </button>
-      </div>
+      {/* Destination URL */}
+      {editingUrl ? (
+        <div className="mb-2">
+          <div className="flex items-center gap-1 min-w-0">
+            <input
+              autoFocus
+              value={editUrl}
+              onChange={e => { setEditUrl(e.target.value); setUrlError(''); }}
+              onKeyDown={e => { if (e.key === 'Enter') handleUpdateUrl(); if (e.key === 'Escape') setEditingUrl(false); }}
+              className="flex-1 min-w-0 px-2 py-1 text-xs text-slate-700 border border-teal-400 rounded-md focus:outline-none focus:ring-1 focus:ring-teal-500"
+              placeholder="https://newdestination.com"
+            />
+            <button onClick={handleUpdateUrl} disabled={savingUrl} className="shrink-0 text-teal-600 hover:text-teal-700 disabled:opacity-40">
+              {savingUrl ? <Loader2 className="w-3 h-3 animate-spin" /> : <Check className="w-3 h-3" />}
+            </button>
+          </div>
+          {urlError && <p className="text-xs text-red-500 mt-0.5">{urlError}</p>}
+        </div>
+      ) : (
+        <div className="flex items-center gap-1 mb-2 min-w-0">
+          <p className="text-xs text-slate-400 truncate flex-1">{qr.url}</p>
+          {isPro ? (
+            <button
+              onClick={() => { setEditingUrl(true); setEditUrl(qr.url); }}
+              className="shrink-0 text-slate-300 hover:text-teal-500 transition-colors"
+              title="Edit destination URL"
+            >
+              <Pencil className="w-3 h-3" />
+            </button>
+          ) : (
+            <a href="/#pricing" className="shrink-0 text-slate-200 hover:text-teal-500 transition-colors" title="Upgrade to edit destination">
+              <Lock className="w-3 h-3" />
+            </a>
+          )}
+          <button onClick={copyUrl} className="shrink-0 text-slate-300 hover:text-slate-600 transition-colors" title="Copy URL">
+            {copied ? <Check className="w-3 h-3 text-emerald-500" /> : <Copy className="w-3 h-3" />}
+          </button>
+        </div>
+      )}
 
       {/* Meta */}
       <div className="flex items-center gap-2 text-xs text-slate-400">
@@ -111,7 +163,7 @@ function QRCard({
         <span>·</span>
         <span>{new Date(qr.created_at).toLocaleDateString()}</span>
         <span>·</span>
-        <span>{qr.scan_count} scans</span>
+        <span>{qr.scan_count} {qr.scan_count === 1 ? 'scan' : 'scans'}</span>
       </div>
 
       {/* Actions */}
@@ -140,6 +192,7 @@ export default function Dashboard() {
   const { user, loading: authLoading } = useAuth();
   const [qrs, setQrs] = useState<QRCodeType[]>([]);
   const [fetching, setFetching] = useState(true);
+  const [plan, setPlan] = useState<Plan>('free');
 
   useEffect(() => {
     if (!authLoading && !user) navigate('/auth');
@@ -151,6 +204,7 @@ export default function Dashboard() {
       setQrs(data ?? []);
       setFetching(false);
     });
+    ensureProfile(user.id).then(setPlan);
   }, [user]);
 
   async function handleSignOut() {
@@ -168,10 +222,35 @@ export default function Dashboard() {
     if (!error) setQrs(prev => prev.map(q => q.id === id ? { ...q, name } : q));
   }
 
+  async function handleUpdateUrl(id: string, url: string) {
+    const { error } = await updateQRUrl(id, url);
+    if (!error) setQrs(prev => prev.map(q => q.id === id ? { ...q, url } : q));
+  }
+
+  const isPro = plan === 'pro' || plan === 'growth';
+
   if (authLoading || !user) return null;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      {/* Upgrade banner */}
+      {!fetching && plan === 'free' && (
+        <div className="bg-gradient-to-r from-teal-600 to-teal-500">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex items-center justify-between gap-4">
+            <p className="text-sm text-white">
+              <span className="font-semibold">Free plan:</span> upgrade to edit destinations and repurpose printed QR codes
+            </p>
+            <a
+              href="/#pricing"
+              className="shrink-0 flex items-center gap-1 text-xs font-semibold bg-white text-teal-700 px-3 py-1.5 rounded-lg hover:bg-teal-50 transition-colors"
+            >
+              <Zap className="w-3 h-3" />
+              See plans
+            </a>
+          </div>
+        </div>
+      )}
+
       <header className="bg-white border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
           <button onClick={() => navigate('/')} className="flex items-center gap-2">
@@ -179,6 +258,12 @@ export default function Dashboard() {
             <span className="font-bold text-slate-900 text-lg">QRcraft</span>
           </button>
           <div className="flex items-center gap-4">
+            {isPro && (
+              <span className="hidden sm:inline-flex items-center gap-1 text-xs font-semibold text-teal-700 bg-teal-50 px-2.5 py-1 rounded-full border border-teal-200">
+                <Zap className="w-3 h-3" />
+                {plan === 'growth' ? 'Growth' : 'Pro'}
+              </span>
+            )}
             <span className="text-sm text-slate-500 hidden sm:block truncate max-w-[200px]">{user.email}</span>
             <button
               onClick={handleSignOut}
@@ -240,8 +325,10 @@ export default function Dashboard() {
               <QRCard
                 key={qr.id}
                 qr={qr}
+                isPro={isPro}
                 onDelete={handleDelete}
                 onRename={handleRename}
+                onUpdateUrl={handleUpdateUrl}
               />
             ))}
           </div>

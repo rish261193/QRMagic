@@ -48,3 +48,11 @@ export async function getQRUrl(id: string): Promise<string | null> {
 export async function trackScan(id: string) {
   await supabase.rpc('increment_scan', { qr_id: id });
 }
+
+export async function updateQRUrl(id: string, url: string) {
+  const { error } = await supabase
+    .from('qr_codes')
+    .update({ url })
+    .eq('id', id);
+  return { error };
+}

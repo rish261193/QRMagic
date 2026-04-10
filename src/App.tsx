@@ -15,6 +15,7 @@ import Auth from './pages/Auth';
 import Dashboard from './pages/Dashboard';
 import Redirect from './pages/Redirect';
 import NotFound from './pages/NotFound';
+import UpgradeSuccess from './pages/UpgradeSuccess';
 
 function LandingPage() {
   return (
@@ -43,6 +44,7 @@ function App() {
           <Route path="/auth" element={<Auth />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/r/:id" element={<Redirect />} />
+          <Route path="/upgrade/success" element={<UpgradeSuccess />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </AuthProvider>
