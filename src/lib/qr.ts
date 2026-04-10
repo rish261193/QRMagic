@@ -10,13 +10,13 @@ export interface QRCode {
   scan_count: number;
 }
 
-export async function saveQR(params: { name: string; url: string; style: string }) {
+export async function saveQR(params: { name: string; url: string; style: string; user_id: string }) {
   const { data, error } = await supabase
     .from('qr_codes')
     .insert([params])
     .select()
     .single();
-  return { data, error };
+  return { data: data as QRCode | null, error };
 }
 
 export async function fetchQRs() {
@@ -29,5 +29,13 @@ export async function fetchQRs() {
 
 export async function deleteQR(id: string) {
   const { error } = await supabase.from('qr_codes').delete().eq('id', id);
+  return { error };
+}
+
+export async function renameQR(id: string, name: string) {
+  const { error } = await supabase
+    .from('qr_codes')
+    .update({ name })
+    .eq('id', id);
   return { error };
 }
