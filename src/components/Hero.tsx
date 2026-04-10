@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 export default function Hero() {
   const navigate = useNavigate();
   return (
-    <section className="relative overflow-hidden bg-white border-b border-slate-100">
+    <section className="relative overflow-hidden bg-white border-b-2 border-slate-200">
       <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-emerald-50/30 pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
