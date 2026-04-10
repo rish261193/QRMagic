@@ -36,8 +36,8 @@ export default function Navigation() {
           </div>
 
           <div className="flex items-center gap-4">
-            <button disabled className="hidden md:block text-slate-400 font-medium cursor-not-allowed">
-              Sign in — coming soon
+            <button onClick={() => navigate('/auth')} className="hidden md:block text-slate-700 hover:text-slate-900 font-medium transition-colors">
+              Sign in
             </button>
             <button onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })} className="hidden md:block px-5 py-2 bg-slate-900 text-white rounded-lg font-medium hover:bg-slate-800 transition-colors">
               Get started
