@@ -14,15 +14,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Hydrate from existing session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null);
-      setLoading(false);
-    });
-
-    // Keep in sync with auth state changes
+    // onAuthStateChange fires INITIAL_SESSION on startup, including processing
+    // any URL tokens from email confirmation links — so loading stays true
+    // until the session state is actually known, preventing a premature
+    // redirect to /auth when a user lands here via a confirmation email.
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
+      setLoading(false);
     });
 
     return () => subscription.unsubscribe();
