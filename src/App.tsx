@@ -16,6 +16,8 @@ import Dashboard from './pages/Dashboard';
 import Redirect from './pages/Redirect';
 import NotFound from './pages/NotFound';
 import UpgradeSuccess from './pages/UpgradeSuccess';
+import EditableKit from './pages/EditableKit';
+import Growth from './pages/Growth';
 
 function LandingPage() {
   return (
@@ -45,6 +47,8 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/r/:id" element={<Redirect />} />
           <Route path="/upgrade/success" element={<UpgradeSuccess />} />
+          <Route path="/editable" element={<EditableKit />} />
+          <Route path="/growth" element={<Growth />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </AuthProvider>

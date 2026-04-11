@@ -26,6 +26,7 @@ function QRCard({
   onRename: (id: string, name: string) => void;
   onUpdateUrl: (id: string, url: string) => void;
 }) {
+  const navigate = useNavigate();
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [deleting, setDeleting] = useState(false);
   const [editing, setEditing] = useState(false);
@@ -148,7 +149,7 @@ function QRCard({
             </button>
           ) : (
             <button
-              onClick={() => { window.location.href = '/#pricing'; }}
+              onClick={() => navigate('/growth')}
               className="shrink-0 text-slate-200 hover:text-teal-500 transition-colors"
               title="Upgrade to edit destination"
             >

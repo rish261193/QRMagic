@@ -1,10 +1,15 @@
 import { QrCode } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
-const productLinks: { label: string; sectionId: string }[] = [
+const scrollLinks: { label: string; sectionId: string }[] = [
   { label: 'Features',  sectionId: 'features' },
   { label: 'Pricing',   sectionId: 'pricing'  },
-  { label: 'Use Cases', sectionId: 'features' },
   { label: 'FAQ',       sectionId: 'faq'      },
+];
+
+const pageLinks: { label: string; href: string }[] = [
+  { label: 'Editable QR Kit', href: '/editable' },
+  { label: 'Growth',          href: '/growth'   },
 ];
 
 const otherLinks: Record<string, string[]> = {
@@ -13,6 +18,7 @@ const otherLinks: Record<string, string[]> = {
 };
 
 export default function Footer() {
+  const navigate = useNavigate();
   const scrollTo = (id: string) =>
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 
@@ -30,11 +36,11 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Product — scroll links */}
+          {/* Product */}
           <div>
             <h3 className="font-semibold text-slate-900 mb-4">Product</h3>
             <ul className="space-y-3">
-              {productLinks.map(({ label, sectionId }) => (
+              {scrollLinks.map(({ label, sectionId }) => (
                 <li key={label}>
                   <button
                     onClick={() => scrollTo(sectionId)}
@@ -44,10 +50,20 @@ export default function Footer() {
                   </button>
                 </li>
               ))}
+              {pageLinks.map(({ label, href }) => (
+                <li key={label}>
+                  <button
+                    onClick={() => navigate(href)}
+                    className="text-slate-600 hover:text-slate-900 text-sm transition-colors"
+                  >
+                    {label}
+                  </button>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Company + Legal — placeholder */}
+          {/* Company + Legal */}
           {Object.entries(otherLinks).map(([category, links]) => (
             <div key={category}>
               <h3 className="font-semibold text-slate-900 mb-4">{category}</h3>
