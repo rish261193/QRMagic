@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Privacy() {
   const navigate = useNavigate();
-  useEffect(() => { window.scrollTo(0, 0); }, []);
+  useEffect(() => { window.scrollTo(0, 0); document.title = 'Privacy Policy — QRcraft'; }, []);
 
   return (
     <div className="min-h-screen bg-slate-900 text-white">

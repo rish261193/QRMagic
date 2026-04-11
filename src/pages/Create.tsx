@@ -4,7 +4,7 @@ import { ArrowLeft, QrCode, Download, Share2, Check, LayoutDashboard, Store, Hea
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { saveQR } from '../lib/qr';
-import { ensureProfile, type Plan } from '../lib/profile';
+import { usePlan } from '../hooks/usePlan';
 
 type StyleKey = 'classic' | 'brand' | 'coral' | 'midnight';
 type LogoKey = 'none' | 'store' | 'heart' | 'star';
@@ -49,6 +49,7 @@ function LogoIcon({ logoKey, color, size = 28 }: { logoKey: LogoKey; color: stri
 export default function Create() {
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { isPro } = usePlan();
   const [url, setUrl] = useState('');
   const [submittedUrl, setSubmittedUrl] = useState('');
   const [error, setError] = useState('');
@@ -59,18 +60,15 @@ export default function Create() {
   const [qrName, setQrName] = useState('');
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
   const [savedId, setSavedId] = useState<string | null>(null);
-  const [plan, setPlan] = useState<Plan>('free');
   const canvasRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    document.title = 'Create QR Code — QRcraft';
+  }, []);
 
   useEffect(() => {
     if (submittedUrl) setQrName(nameFromUrl(submittedUrl));
   }, [submittedUrl]);
-
-  useEffect(() => {
-    if (user) ensureProfile(user.id).then(setPlan);
-  }, [user]);
-
-  const isPro = plan === 'pro' || plan === 'growth';
   const step = submittedUrl ? 2 : 1;
 
   const qrValue = savedId

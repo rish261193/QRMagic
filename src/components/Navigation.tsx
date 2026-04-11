@@ -1,12 +1,14 @@
-import { QrCode, Menu, X, LayoutDashboard, LogOut } from 'lucide-react';
+import { QrCode, Menu, X, LayoutDashboard, LogOut, BarChart2, Zap } from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { usePlan } from '../hooks/usePlan';
 import { signOut } from '../lib/auth';
 
 export default function Navigation() {
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { isGrowth } = usePlan();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const scrollToSection = (id: string) => {
@@ -24,18 +26,15 @@ export default function Navigation() {
     <nav className="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md border-b border-slate-200 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <button
-            onClick={() => navigate('/')}
-            className="flex items-center gap-2"
-          >
+          <button onClick={() => navigate('/')} className="flex items-center gap-2">
             <QrCode className="w-6 h-6 text-slate-900" />
             <span className="text-xl font-bold text-slate-900">QRcraft</span>
           </button>
 
           <div className="hidden md:flex items-center gap-8">
-            <a href="#features" className="text-slate-700 hover:text-slate-900 font-medium transition-colors">Features</a>
-            <a href="#pricing" className="text-slate-700 hover:text-slate-900 font-medium transition-colors">Pricing</a>
-            <a href="#faq" className="text-slate-700 hover:text-slate-900 font-medium transition-colors">FAQ</a>
+            <button onClick={() => scrollToSection('features')} className="text-slate-700 hover:text-slate-900 font-medium transition-colors">Features</button>
+            <button onClick={() => scrollToSection('pricing')} className="text-slate-700 hover:text-slate-900 font-medium transition-colors">Pricing</button>
+            <button onClick={() => scrollToSection('faq')} className="text-slate-700 hover:text-slate-900 font-medium transition-colors">FAQ</button>
           </div>
 
           <div className="flex items-center gap-4">
@@ -48,6 +47,23 @@ export default function Navigation() {
                   <LayoutDashboard className="w-4 h-4" />
                   Dashboard
                 </button>
+                {isGrowth ? (
+                  <button
+                    onClick={() => navigate('/analytics')}
+                    className="hidden md:flex items-center gap-1.5 text-slate-700 hover:text-slate-900 font-medium transition-colors"
+                  >
+                    <BarChart2 className="w-4 h-4" />
+                    Analytics
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => navigate('/growth')}
+                    className="hidden md:flex items-center gap-1.5 text-teal-600 hover:text-teal-700 font-medium transition-colors text-sm"
+                  >
+                    <Zap className="w-3.5 h-3.5" />
+                    Upgrade
+                  </button>
+                )}
                 <button
                   onClick={handleSignOut}
                   className="hidden md:flex items-center gap-1.5 text-slate-500 hover:text-slate-900 font-medium transition-colors"
@@ -65,7 +81,7 @@ export default function Navigation() {
                   Sign in
                 </button>
                 <button
-                  onClick={() => navigate(user ? '/dashboard' : '/create')}
+                  onClick={() => navigate('/create')}
                   className="hidden md:block px-5 py-2 bg-slate-900 text-white rounded-lg font-medium hover:bg-slate-800 transition-colors"
                 >
                   Get started
@@ -74,7 +90,7 @@ export default function Navigation() {
             )}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 text-slate-700 hover:text-slate-900"
+              className="md:hidden p-2 text-slate-700 hover:text-slate-900 min-h-[44px] min-w-[44px] flex items-center justify-center"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -85,32 +101,55 @@ export default function Navigation() {
       {mobileMenuOpen && (
         <div className="md:hidden border-t border-slate-200 bg-white/95 backdrop-blur-md">
           <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-1">
-            <button onClick={() => scrollToSection('features')} className="text-left text-slate-700 hover:text-slate-900 font-medium py-2 transition-colors">Features</button>
-            <button onClick={() => scrollToSection('pricing')} className="text-left text-slate-700 hover:text-slate-900 font-medium py-2 transition-colors">Pricing</button>
-            <button onClick={() => scrollToSection('faq')} className="text-left text-slate-700 hover:text-slate-900 font-medium py-2 transition-colors">FAQ</button>
+            <button onClick={() => scrollToSection('features')} className="text-left text-slate-700 hover:text-slate-900 font-medium py-3 transition-colors min-h-[44px]">Features</button>
+            <button onClick={() => scrollToSection('pricing')} className="text-left text-slate-700 hover:text-slate-900 font-medium py-3 transition-colors min-h-[44px]">Pricing</button>
+            <button onClick={() => scrollToSection('faq')} className="text-left text-slate-700 hover:text-slate-900 font-medium py-3 transition-colors min-h-[44px]">FAQ</button>
             <div className="pt-2 mt-1 border-t border-slate-100 flex flex-col gap-2">
               {user ? (
                 <>
                   <button
                     onClick={() => { navigate('/dashboard'); setMobileMenuOpen(false); }}
-                    className="w-full py-3 bg-slate-900 text-white rounded-lg font-semibold text-sm hover:bg-slate-800 transition-colors"
+                    className="w-full py-3 bg-slate-900 text-white rounded-lg font-semibold text-sm hover:bg-slate-800 transition-colors min-h-[44px]"
                   >
                     Dashboard
                   </button>
+                  {isGrowth ? (
+                    <button
+                      onClick={() => { navigate('/analytics'); setMobileMenuOpen(false); }}
+                      className="w-full py-3 border border-teal-200 text-teal-700 rounded-lg font-semibold text-sm hover:bg-teal-50 transition-colors min-h-[44px]"
+                    >
+                      Analytics
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => { navigate('/growth'); setMobileMenuOpen(false); }}
+                      className="w-full py-3 border border-slate-200 text-slate-600 rounded-lg font-semibold text-sm hover:bg-slate-50 transition-colors min-h-[44px]"
+                    >
+                      Upgrade to Growth
+                    </button>
+                  )}
                   <button
                     onClick={handleSignOut}
-                    className="w-full py-3 border border-slate-200 text-slate-700 rounded-lg font-semibold text-sm hover:bg-slate-50 transition-colors"
+                    className="w-full py-3 border border-slate-200 text-slate-700 rounded-lg font-semibold text-sm hover:bg-slate-50 transition-colors min-h-[44px]"
                   >
                     Sign out
                   </button>
                 </>
               ) : (
-                <button
-                  onClick={() => { navigate('/create'); setMobileMenuOpen(false); }}
-                  className="w-full py-3 bg-slate-900 text-white rounded-lg font-semibold text-sm hover:bg-slate-800 transition-colors"
-                >
-                  Create free QR
-                </button>
+                <>
+                  <button
+                    onClick={() => { navigate('/auth'); setMobileMenuOpen(false); }}
+                    className="w-full py-3 border border-slate-200 text-slate-700 rounded-lg font-semibold text-sm hover:bg-slate-50 transition-colors min-h-[44px]"
+                  >
+                    Sign in
+                  </button>
+                  <button
+                    onClick={() => { navigate('/create'); setMobileMenuOpen(false); }}
+                    className="w-full py-3 bg-slate-900 text-white rounded-lg font-semibold text-sm hover:bg-slate-800 transition-colors min-h-[44px]"
+                  >
+                    Create free QR
+                  </button>
+                </>
               )}
             </div>
           </div>

@@ -24,7 +24,7 @@ export default function Blog() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
-  useEffect(() => { window.scrollTo(0, 0); }, []);
+  useEffect(() => { window.scrollTo(0, 0); document.title = 'Blog — QRcraft'; }, []);
 
   function handleSubscribe(e: React.FormEvent) {
     e.preventDefault();

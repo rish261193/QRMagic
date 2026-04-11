@@ -25,7 +25,7 @@ const reasons = [
 
 export default function Contact() {
   const navigate = useNavigate();
-  useEffect(() => { window.scrollTo(0, 0); }, []);
+  useEffect(() => { window.scrollTo(0, 0); document.title = 'Contact — QRcraft'; }, []);
 
   return (
     <div className="min-h-screen bg-slate-900 text-white">

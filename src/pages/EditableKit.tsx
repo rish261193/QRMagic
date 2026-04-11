@@ -103,7 +103,10 @@ function CtaButton({ label, large = false }: { label: string; large?: boolean })
 
 export default function EditableKit() {
   const navigate = useNavigate();
-  useEffect(() => { window.scrollTo(0, 0); }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    document.title = 'Editable QR Kit — $29 One-Time — QRcraft';
+  }, []);
 
   return (
     <div className="min-h-screen bg-slate-900 text-white">

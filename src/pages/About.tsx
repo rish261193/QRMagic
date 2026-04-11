@@ -22,7 +22,7 @@ const values = [
 
 export default function About() {
   const navigate = useNavigate();
-  useEffect(() => { window.scrollTo(0, 0); }, []);
+  useEffect(() => { window.scrollTo(0, 0); document.title = 'About — QRcraft'; }, []);
 
   return (
     <div className="min-h-screen bg-slate-900 text-white">

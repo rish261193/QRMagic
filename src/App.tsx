@@ -13,6 +13,7 @@ import Footer from './components/Footer';
 import Create from './pages/Create';
 import Auth from './pages/Auth';
 import Dashboard from './pages/Dashboard';
+import Analytics from './pages/Analytics';
 import Redirect from './pages/Redirect';
 import NotFound from './pages/NotFound';
 import UpgradeSuccess from './pages/UpgradeSuccess';
@@ -24,6 +25,7 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Blog from './pages/Blog';
 import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 
 function LandingPage() {
   return (
@@ -51,6 +53,7 @@ function App() {
           <Route path="/create" element={<Create />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/analytics" element={<Analytics />} />
           <Route path="/r/:id" element={<Redirect />} />
           <Route path="/upgrade/success" element={<UpgradeSuccess />} />
           <Route path="/editable" element={<EditableKit />} />
@@ -61,6 +64,8 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/404" element={<NotFound />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </AuthProvider>

@@ -111,7 +111,10 @@ function CtaButton({ label }: { label: string }) {
 
 export default function Growth() {
   const navigate = useNavigate();
-  useEffect(() => { window.scrollTo(0, 0); }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    document.title = 'Growth Plan — $12/month — QRcraft';
+  }, []);
 
   return (
     <div className="min-h-screen bg-slate-900 text-white">
