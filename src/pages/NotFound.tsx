@@ -13,7 +13,7 @@ export default function NotFound() {
         onClick={() => navigate('/')}
         className="px-6 py-3 bg-teal-600 text-white rounded-lg font-semibold hover:bg-teal-500 transition-colors"
       >
-        Back to home
+        Go home
       </button>
     </div>
   );

@@ -1,11 +1,13 @@
 import { useState, useRef, useEffect } from 'react';
 import { QRCodeCanvas } from 'qrcode.react';
-import { ArrowLeft, QrCode, Download, Share2, Check, LayoutDashboard } from 'lucide-react';
+import { ArrowLeft, QrCode, Download, Share2, Check, LayoutDashboard, Store, Heart, Star, Lock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { saveQR } from '../lib/qr';
+import { ensureProfile, type Plan } from '../lib/profile';
 
-type StyleKey = 'classic' | 'brand' | 'bold';
+type StyleKey = 'classic' | 'brand' | 'coral' | 'midnight';
+type LogoKey = 'none' | 'store' | 'heart' | 'star';
 
 interface QRStyle {
   label: string;
@@ -14,10 +16,18 @@ interface QRStyle {
 }
 
 const QR_STYLES: Record<StyleKey, QRStyle> = {
-  classic: { label: 'Classic', fgColor: '#0f172a', bgColor: '#ffffff' },
-  brand:   { label: 'Brand',   fgColor: '#0d9488', bgColor: '#ffffff' },
-  bold:    { label: 'Bold',    fgColor: '#dc2626', bgColor: '#ffffff' },
+  classic:  { label: 'Classic',  fgColor: '#0f172a', bgColor: '#ffffff' },
+  brand:    { label: 'Brand',    fgColor: '#0d9488', bgColor: '#ffffff' },
+  coral:    { label: 'Coral',    fgColor: '#f97316', bgColor: '#ffffff' },
+  midnight: { label: 'Midnight', fgColor: '#7c3aed', bgColor: '#ffffff' },
 };
+
+const LOGO_OPTIONS: { key: LogoKey; label: string }[] = [
+  { key: 'none',  label: 'None'  },
+  { key: 'store', label: 'Store' },
+  { key: 'heart', label: 'Heart' },
+  { key: 'star',  label: 'Star'  },
+];
 
 function nameFromUrl(url: string): string {
   try {
@@ -28,6 +38,14 @@ function nameFromUrl(url: string): string {
   }
 }
 
+function LogoIcon({ logoKey, color, size = 28 }: { logoKey: LogoKey; color: string; size?: number }) {
+  const props = { style: { color, width: size, height: size } };
+  if (logoKey === 'store') return <Store {...props} />;
+  if (logoKey === 'heart') return <Heart {...props} />;
+  if (logoKey === 'star')  return <Star  {...props} />;
+  return null;
+}
+
 export default function Create() {
   const navigate = useNavigate();
   const { user } = useAuth();
@@ -35,20 +53,26 @@ export default function Create() {
   const [submittedUrl, setSubmittedUrl] = useState('');
   const [error, setError] = useState('');
   const [selectedStyle, setSelectedStyle] = useState<StyleKey>('brand');
+  const [centerLogo, setCenterLogo] = useState<LogoKey>('none');
+  const [showUpgradePrompt, setShowUpgradePrompt] = useState(false);
   const [copied, setCopied] = useState(false);
   const [qrName, setQrName] = useState('');
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
   const [savedId, setSavedId] = useState<string | null>(null);
+  const [plan, setPlan] = useState<Plan>('free');
   const canvasRef = useRef<HTMLDivElement>(null);
 
-  // Auto-populate name when URL is submitted
   useEffect(() => {
     if (submittedUrl) setQrName(nameFromUrl(submittedUrl));
   }, [submittedUrl]);
 
+  useEffect(() => {
+    if (user) ensureProfile(user.id).then(setPlan);
+  }, [user]);
+
+  const isPro = plan === 'pro' || plan === 'growth';
   const step = submittedUrl ? 2 : 1;
 
-  // After save, the QR encodes the redirect URL so scans are tracked
   const qrValue = savedId
     ? `${window.location.origin}/r/${savedId}`
     : submittedUrl;
@@ -96,6 +120,25 @@ export default function Create() {
     } else {
       setSaveStatus('error');
     }
+  }
+
+  function selectStyle(key: StyleKey) {
+    if (!isPro && key !== 'classic') {
+      setShowUpgradePrompt(true);
+      return;
+    }
+    setShowUpgradePrompt(false);
+    setSelectedStyle(key);
+    if (saveStatus !== 'saved') setSaveStatus('idle');
+  }
+
+  function selectLogo(key: LogoKey) {
+    if (!isPro && key !== 'none') {
+      setShowUpgradePrompt(true);
+      return;
+    }
+    setShowUpgradePrompt(false);
+    setCenterLogo(key);
   }
 
   const style = QR_STYLES[selectedStyle];
@@ -164,39 +207,127 @@ export default function Create() {
             <p className="text-slate-500 mb-10 text-sm truncate px-4">{submittedUrl}</p>
 
             <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-8 mb-6">
+              {/* QR canvas with logo overlay */}
               <div ref={canvasRef} className="flex justify-center mb-8">
-                <QRCodeCanvas
-                  value={qrValue}
-                  size={220}
-                  fgColor={style.fgColor}
-                  bgColor={style.bgColor}
-                  level="H"
-                  marginSize={2}
-                />
-              </div>
-
-              {/* Style picker */}
-              <div className="mb-6">
-                <p className="text-xs text-slate-400 mb-3 uppercase tracking-wide font-medium">Choose your style</p>
-                <div className="flex gap-3">
-                  {(Object.entries(QR_STYLES) as [StyleKey, QRStyle][]).map(([key, s]) => (
-                    <button
-                      key={key}
-                      onClick={() => { setSelectedStyle(key); if (saveStatus !== 'saved') setSaveStatus('idle'); }}
-                      className={`flex-1 flex flex-col items-center gap-2 p-3 rounded-xl border-2 transition-all ${
-                        selectedStyle === key
-                          ? 'border-teal-500 bg-teal-50'
-                          : 'border-slate-200 hover:border-slate-300 bg-white'
-                      }`}
-                    >
-                      <div className="w-8 h-8 rounded-sm" style={{ backgroundColor: s.fgColor }} />
-                      <span className={`text-xs font-medium ${selectedStyle === key ? 'text-teal-600' : 'text-slate-500'}`}>
-                        {s.label}
-                      </span>
-                    </button>
-                  ))}
+                <div className="relative inline-block">
+                  <QRCodeCanvas
+                    value={qrValue}
+                    size={220}
+                    fgColor={style.fgColor}
+                    bgColor={style.bgColor}
+                    level="H"
+                    marginSize={2}
+                  />
+                  {centerLogo !== 'none' && (
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                      <div className="bg-white rounded-lg p-1.5 shadow-sm">
+                        <LogoIcon logoKey={centerLogo} color={style.fgColor} size={30} />
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
+
+              {/* Color picker */}
+              <div className="mb-5">
+                <p className="text-xs text-slate-400 mb-3 uppercase tracking-wide font-medium text-left">
+                  Color
+                  {!isPro && <span className="ml-2 text-teal-600 normal-case font-normal">· upgrade for custom colors</span>}
+                </p>
+                <div className="grid grid-cols-4 gap-2">
+                  {(Object.entries(QR_STYLES) as [StyleKey, QRStyle][]).map(([key, s]) => {
+                    const locked = !isPro && key !== 'classic';
+                    return (
+                      <button
+                        key={key}
+                        onClick={() => selectStyle(key)}
+                        className={`flex flex-col items-center gap-2 p-2.5 rounded-xl border-2 transition-all ${
+                          selectedStyle === key
+                            ? 'border-teal-500 bg-teal-50'
+                            : 'border-slate-200 hover:border-slate-300 bg-white'
+                        }`}
+                      >
+                        <div className="relative">
+                          <div className="w-7 h-7 rounded-sm" style={{ backgroundColor: s.fgColor }} />
+                          {locked && (
+                            <div className="absolute -top-1 -right-1 bg-slate-400 rounded-full p-0.5">
+                              <Lock className="w-2 h-2 text-white" />
+                            </div>
+                          )}
+                        </div>
+                        <span className={`text-xs font-medium ${selectedStyle === key ? 'text-teal-600' : 'text-slate-500'}`}>
+                          {s.label}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Logo picker */}
+              <div className="mb-6">
+                <p className="text-xs text-slate-400 mb-3 uppercase tracking-wide font-medium text-left">
+                  Center logo
+                  {!isPro && <span className="ml-2 text-teal-600 normal-case font-normal">· upgrade to add</span>}
+                </p>
+                <div className="grid grid-cols-4 gap-2">
+                  {LOGO_OPTIONS.map(({ key, label }) => {
+                    const locked = !isPro && key !== 'none';
+                    return (
+                      <button
+                        key={key}
+                        onClick={() => selectLogo(key)}
+                        className={`flex flex-col items-center gap-2 p-2.5 rounded-xl border-2 transition-all ${
+                          centerLogo === key
+                            ? 'border-teal-500 bg-teal-50'
+                            : 'border-slate-200 hover:border-slate-300 bg-white'
+                        }`}
+                      >
+                        <div className="relative w-7 h-7 flex items-center justify-center">
+                          {key === 'none' ? (
+                            <span className="text-slate-400 text-xs font-medium">—</span>
+                          ) : (
+                            <>
+                              <LogoIcon logoKey={key} color={centerLogo === key ? '#0d9488' : '#94a3b8'} size={18} />
+                              {locked && (
+                                <div className="absolute -top-1 -right-1 bg-slate-400 rounded-full p-0.5">
+                                  <Lock className="w-2 h-2 text-white" />
+                                </div>
+                              )}
+                            </>
+                          )}
+                        </div>
+                        <span className={`text-xs font-medium ${centerLogo === key ? 'text-teal-600' : 'text-slate-500'}`}>
+                          {label}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Upgrade prompt */}
+              {showUpgradePrompt && (
+                <div className="mb-5 p-4 bg-amber-900/10 border border-amber-200 rounded-xl text-center">
+                  <p className="text-amber-700 text-sm font-semibold mb-2">
+                    Unlock custom styles with Editable QR Kit — $29
+                  </p>
+                  <div className="flex items-center justify-center gap-3">
+                    <button
+                      onClick={() => navigate('/editable')}
+                      className="text-xs bg-teal-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-teal-500 transition-colors"
+                    >
+                      Get Editable QR Kit
+                    </button>
+                    <button
+                      onClick={() => setShowUpgradePrompt(false)}
+                      className="text-xs text-slate-400 hover:text-slate-600 transition-colors"
+                    >
+                      Dismiss
+                    </button>
+                  </div>
+                </div>
+              )}
 
               {/* Download */}
               <button
@@ -278,7 +409,7 @@ export default function Create() {
             </div>
 
             <button
-              onClick={() => { setSubmittedUrl(''); setUrl(''); setSaveStatus('idle'); setSavedId(null); }}
+              onClick={() => { setSubmittedUrl(''); setUrl(''); setSaveStatus('idle'); setSavedId(null); setShowUpgradePrompt(false); }}
               className="text-sm text-slate-400 hover:text-slate-600 transition-colors"
             >
               ← Create another

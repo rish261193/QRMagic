@@ -26,9 +26,10 @@ const plans = [
     features: [
       'Everything in Free',
       'Edit destination anytime',
+      'Custom colors and dot styles',
+      'Add your logo to the center',
       'No reprinting needed',
-      'Update URLs instantly',
-      'Lifetime access'
+      'Lifetime access — pay once'
     ],
     cta: 'Buy once',
     highlighted: true,

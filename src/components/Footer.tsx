@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const scrollLinks: { label: string; sectionId: string }[] = [
   { label: 'Features',  sectionId: 'features' },
   { label: 'Pricing',   sectionId: 'pricing'  },
+  { label: 'Use Cases', sectionId: 'features' },
   { label: 'FAQ',       sectionId: 'faq'      },
 ];
 
@@ -12,10 +13,18 @@ const pageLinks: { label: string; href: string }[] = [
   { label: 'Growth Plan',     href: '/growth'   },
 ];
 
-const otherLinks: Record<string, string[]> = {
-  Company: ['About', 'Blog', 'Contact', 'Support'],
-  Legal:   ['Privacy', 'Terms', 'Security'],
-};
+const companyLinks: { label: string; href: string }[] = [
+  { label: 'About',   href: '/about'   },
+  { label: 'Blog',    href: '/blog'    },
+  { label: 'Contact', href: '/contact' },
+  { label: 'Support', href: '/contact' },
+];
+
+const legalLinks: { label: string; href: string }[] = [
+  { label: 'Privacy',  href: '/privacy' },
+  { label: 'Terms',    href: '/terms'   },
+  { label: 'Security', href: '/contact' },
+];
 
 export default function Footer() {
   const navigate = useNavigate();
@@ -63,21 +72,39 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Company + Legal */}
-          {Object.entries(otherLinks).map(([category, links]) => (
-            <div key={category}>
-              <h3 className="font-semibold text-slate-900 mb-4">{category}</h3>
-              <ul className="space-y-3">
-                {links.map((label) => (
-                  <li key={label}>
-                    <a href="#" className="text-slate-600 hover:text-slate-900 text-sm transition-colors">
-                      {label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {/* Company */}
+          <div>
+            <h3 className="font-semibold text-slate-900 mb-4">Company</h3>
+            <ul className="space-y-3">
+              {companyLinks.map(({ label, href }) => (
+                <li key={label}>
+                  <button
+                    onClick={() => navigate(href)}
+                    className="text-slate-600 hover:text-slate-900 text-sm transition-colors"
+                  >
+                    {label}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Legal */}
+          <div>
+            <h3 className="font-semibold text-slate-900 mb-4">Legal</h3>
+            <ul className="space-y-3">
+              {legalLinks.map(({ label, href }) => (
+                <li key={label}>
+                  <button
+                    onClick={() => navigate(href)}
+                    className="text-slate-600 hover:text-slate-900 text-sm transition-colors"
+                  >
+                    {label}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
         <div className="pt-8 border-t border-slate-200">

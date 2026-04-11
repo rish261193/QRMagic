@@ -18,6 +18,12 @@ import NotFound from './pages/NotFound';
 import UpgradeSuccess from './pages/UpgradeSuccess';
 import EditableKit from './pages/EditableKit';
 import Growth from './pages/Growth';
+import Privacy from './pages/Privacy';
+import Terms from './pages/Terms';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import Blog from './pages/Blog';
+import ForgotPassword from './pages/ForgotPassword';
 
 function LandingPage() {
   return (
@@ -49,6 +55,12 @@ function App() {
           <Route path="/upgrade/success" element={<UpgradeSuccess />} />
           <Route path="/editable" element={<EditableKit />} />
           <Route path="/growth" element={<Growth />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </AuthProvider>
