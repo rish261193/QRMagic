@@ -147,9 +147,13 @@ function QRCard({
               <Pencil className="w-3 h-3" />
             </button>
           ) : (
-            <a href="/#pricing" className="shrink-0 text-slate-200 hover:text-teal-500 transition-colors" title="Upgrade to edit destination">
+            <button
+              onClick={() => { window.location.href = '/#pricing'; }}
+              className="shrink-0 text-slate-200 hover:text-teal-500 transition-colors"
+              title="Upgrade to edit destination"
+            >
               <Lock className="w-3 h-3" />
-            </a>
+            </button>
           )}
           <button onClick={copyUrl} className="shrink-0 text-slate-300 hover:text-slate-600 transition-colors" title="Copy URL">
             {copied ? <Check className="w-3 h-3 text-emerald-500" /> : <Copy className="w-3 h-3" />}
