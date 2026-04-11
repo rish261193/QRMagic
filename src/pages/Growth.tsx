@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, QrCode, Check, ChevronDown, BarChart2, Mail, Layout } from 'lucide-react';
+import { QrCode, Check, ChevronDown, BarChart2, Mail, Layout } from 'lucide-react';
 
 const GROWTH_LINK = import.meta.env.VITE_STRIPE_GROWTH_LINK as string | undefined;
 
@@ -116,17 +116,18 @@ export default function Growth() {
   return (
     <div className="min-h-screen bg-slate-900 text-white">
       {/* Header */}
-      <header className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between">
-        <button
-          onClick={() => navigate('/')}
-          className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm font-medium"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Back
-        </button>
-        <div className="flex items-center gap-2">
-          <QrCode className="w-5 h-5 text-teal-400" />
-          <span className="font-bold text-white text-lg">QRcraft</span>
+      <header className="border-b border-slate-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+          <button onClick={() => navigate('/')} className="flex items-center gap-2">
+            <QrCode className="w-5 h-5 text-teal-400" />
+            <span className="font-bold text-white text-lg">QRcraft</span>
+          </button>
+          <button
+            onClick={() => navigate('/')}
+            className="text-sm font-medium text-slate-400 hover:text-white transition-colors"
+          >
+            ← Back to home
+          </button>
         </div>
       </header>
 

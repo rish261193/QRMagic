@@ -9,7 +9,7 @@ const scrollLinks: { label: string; sectionId: string }[] = [
 
 const pageLinks: { label: string; href: string }[] = [
   { label: 'Editable QR Kit', href: '/editable' },
-  { label: 'Growth',          href: '/growth'   },
+  { label: 'Growth Plan',     href: '/growth'   },
 ];
 
 const otherLinks: Record<string, string[]> = {

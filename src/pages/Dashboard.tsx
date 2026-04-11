@@ -149,7 +149,7 @@ function QRCard({
             </button>
           ) : (
             <button
-              onClick={() => navigate('/growth')}
+              onClick={() => navigate('/editable')}
               className="shrink-0 text-slate-200 hover:text-teal-500 transition-colors"
               title="Upgrade to edit destination"
             >
@@ -245,13 +245,13 @@ export default function Dashboard() {
             <p className="text-sm text-white">
               <span className="font-semibold">Free plan:</span> upgrade to edit destinations and repurpose printed QR codes
             </p>
-            <a
-              href="/#pricing"
+            <button
+              onClick={() => { window.location.href = '/#pricing'; }}
               className="shrink-0 flex items-center gap-1 text-xs font-semibold bg-white text-teal-700 px-3 py-1.5 rounded-lg hover:bg-teal-50 transition-colors"
             >
               <Zap className="w-3 h-3" />
               See plans
-            </a>
+            </button>
           </div>
         </div>
       )}

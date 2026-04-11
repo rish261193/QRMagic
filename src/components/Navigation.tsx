@@ -65,7 +65,7 @@ export default function Navigation() {
                   Sign in
                 </button>
                 <button
-                  onClick={() => navigate('/create')}
+                  onClick={() => navigate(user ? '/dashboard' : '/create')}
                   className="hidden md:block px-5 py-2 bg-slate-900 text-white rounded-lg font-medium hover:bg-slate-800 transition-colors"
                 >
                   Get started
