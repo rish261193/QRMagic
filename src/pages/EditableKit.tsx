@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, QrCode, Check, ChevronDown } from 'lucide-react';
 
@@ -42,9 +42,9 @@ const audiences = [
 ];
 
 const competitors = [
-  { name: 'QRcraft', price: '$29', period: 'one-time', editForever: true,  you: true  },
-  { name: 'Bitly',   price: '$29', period: 'per month', editForever: false, you: false },
-  { name: 'QR Tiger',price: '$7',  period: 'per month', editForever: false, you: false },
+  { name: 'QRcraft',          price: '$29', period: 'one-time',  editForever: true,  you: true  },
+  { name: 'Leading platforms',price: '$29', period: 'per month', editForever: false, you: false },
+  { name: 'Other tools',      price: '$7',  period: 'per month', editForever: false, you: false },
 ];
 
 const faqs = [
@@ -103,6 +103,7 @@ function CtaButton({ label, large = false }: { label: string; large?: boolean })
 
 export default function EditableKit() {
   const navigate = useNavigate();
+  useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (
     <div className="min-h-screen bg-slate-900 text-white">

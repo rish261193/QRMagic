@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, QrCode, Check, ChevronDown, BarChart2, Mail, Layout } from 'lucide-react';
 
@@ -77,20 +77,20 @@ const faqs = [
 function FAQItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="border-b border-slate-200 last:border-0">
+    <div className="border-b border-slate-700 last:border-0">
       <button
         onClick={() => setOpen(!open)}
         className="w-full flex items-center justify-between py-5 text-left gap-4"
       >
-        <span className="font-semibold text-slate-900">{q}</span>
+        <span className="font-semibold text-white">{q}</span>
         <ChevronDown className={`w-5 h-5 text-slate-400 shrink-0 transition-transform ${open ? 'rotate-180' : ''}`} />
       </button>
-      {open && <p className="text-slate-600 pb-5 leading-relaxed">{a}</p>}
+      {open && <p className="text-slate-400 pb-5 leading-relaxed">{a}</p>}
     </div>
   );
 }
 
-function CtaButton({ label, dark = false }: { label: string; dark?: boolean }) {
+function CtaButton({ label }: { label: string }) {
   const navigate = useNavigate();
   function handleClick() {
     if (GROWTH_LINK) {
@@ -102,11 +102,7 @@ function CtaButton({ label, dark = false }: { label: string; dark?: boolean }) {
   return (
     <button
       onClick={handleClick}
-      className={`inline-flex items-center justify-center px-8 py-4 font-bold text-lg rounded-xl transition-colors ${
-        dark
-          ? 'bg-teal-500 hover:bg-teal-400 text-white'
-          : 'bg-teal-600 hover:bg-teal-700 text-white'
-      }`}
+      className="inline-flex items-center justify-center px-8 py-4 bg-teal-500 hover:bg-teal-400 text-white font-bold text-lg rounded-xl transition-colors"
     >
       {label}
     </button>
@@ -115,35 +111,34 @@ function CtaButton({ label, dark = false }: { label: string; dark?: boolean }) {
 
 export default function Growth() {
   const navigate = useNavigate();
+  useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-slate-900 text-white">
       {/* Header */}
-      <header className="border-b border-slate-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between">
-          <button
-            onClick={() => navigate('/')}
-            className="flex items-center gap-2 text-slate-500 hover:text-slate-900 transition-colors text-sm font-medium"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Back
-          </button>
-          <div className="flex items-center gap-2">
-            <QrCode className="w-5 h-5 text-teal-600" />
-            <span className="font-bold text-slate-900 text-lg">QRcraft</span>
-          </div>
+      <header className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between">
+        <button
+          onClick={() => navigate('/')}
+          className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm font-medium"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Back
+        </button>
+        <div className="flex items-center gap-2">
+          <QrCode className="w-5 h-5 text-teal-400" />
+          <span className="font-bold text-white text-lg">QRcraft</span>
         </div>
       </header>
 
       {/* Hero */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 text-center">
-        <div className="inline-flex items-center gap-2 bg-teal-50 border border-teal-200 text-teal-700 text-sm font-medium px-4 py-1.5 rounded-full mb-8">
+        <div className="inline-flex items-center gap-2 bg-teal-900/50 border border-teal-700 text-teal-300 text-sm font-medium px-4 py-1.5 rounded-full mb-8">
           $12/month · Cancel anytime
         </div>
-        <h1 className="text-4xl sm:text-6xl font-bold text-slate-900 mb-6 tracking-tight leading-tight">
+        <h1 className="text-4xl sm:text-6xl font-bold text-white mb-6 tracking-tight leading-tight">
           Turn every scan into a customer
         </h1>
-        <p className="text-lg sm:text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">
+        <p className="text-lg sm:text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
           See who scans your QR, capture their email and bring them back. Built for small businesses that want to grow.
         </p>
         <CtaButton label="Start free trial" />
@@ -151,20 +146,20 @@ export default function Growth() {
       </section>
 
       {/* Features */}
-      <section className="bg-slate-50 py-16 sm:py-20">
+      <section className="bg-slate-800/50 py-16 sm:py-20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 text-center mb-14">Everything you need to grow</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-white text-center mb-14">Everything you need to grow</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {features.map((f) => (
-              <div key={f.title} className="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm">
+              <div key={f.title} className="bg-slate-800 rounded-2xl p-8 border border-slate-700">
                 <div className="flex items-center gap-3 mb-5">
-                  <div className="w-10 h-10 bg-teal-50 rounded-xl flex items-center justify-center shrink-0">
-                    <f.Icon className="w-5 h-5 text-teal-600" />
+                  <div className="w-10 h-10 bg-teal-500/20 rounded-xl flex items-center justify-center shrink-0">
+                    <f.Icon className="w-5 h-5 text-teal-400" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-slate-900 leading-snug">{f.title}</h3>
+                    <h3 className="font-semibold text-white leading-snug">{f.title}</h3>
                     {f.badge && (
-                      <span className="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full font-medium">
+                      <span className="text-xs bg-amber-900/50 border border-amber-700 text-amber-400 px-2 py-0.5 rounded-full font-medium">
                         {f.badge}
                       </span>
                     )}
@@ -173,8 +168,8 @@ export default function Growth() {
                 <ul className="space-y-3">
                   {f.items.map((item) => (
                     <li key={item} className="flex items-start gap-2.5">
-                      <Check className="w-4 h-4 text-teal-500 shrink-0 mt-0.5" />
-                      <span className="text-slate-600 text-sm leading-relaxed">{item}</span>
+                      <Check className="w-4 h-4 text-teal-400 shrink-0 mt-0.5" />
+                      <span className="text-slate-400 text-sm leading-relaxed">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -184,21 +179,21 @@ export default function Growth() {
         </div>
       </section>
 
-      {/* VS Bitly */}
+      {/* VS comparison */}
       <section className="py-16 sm:py-20">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-teal-600 font-semibold text-sm uppercase tracking-wide mb-3">vs the competition</p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">Same analytics. A third of the price.</h2>
-          <p className="text-slate-600 mb-12">Bitly charges $29/month for dynamic QR codes and analytics. We charge $12.</p>
+          <p className="text-teal-400 font-semibold text-sm uppercase tracking-wide mb-3">vs the competition</p>
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Same analytics. A third of the price.</h2>
+          <p className="text-slate-400 mb-12">Leading tools charge $29/month for dynamic QR codes and analytics. We charge $12.</p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 text-left">
-            <div className="rounded-2xl border-2 border-teal-500 p-7 bg-teal-50">
+            <div className="rounded-2xl border-2 border-teal-500 p-7 bg-teal-900/30">
               <div className="flex items-center gap-2 mb-1">
-                <span className="font-bold text-slate-900 text-lg">QRcraft Growth</span>
+                <span className="font-bold text-white text-lg">QRcraft Growth</span>
                 <span className="text-xs bg-teal-500 text-white px-2 py-0.5 rounded-full font-semibold">You</span>
               </div>
-              <p className="text-4xl font-bold text-teal-600 mb-5">
-                $12<span className="text-base font-normal text-slate-500">/month</span>
+              <p className="text-4xl font-bold text-teal-300 mb-5">
+                $12<span className="text-base font-normal text-slate-400">/month</span>
               </p>
               <ul className="space-y-2.5">
                 {[
@@ -207,20 +202,20 @@ export default function Growth() {
                   'Edit destination anytime',
                   'Permanent free QR codes included',
                 ].map((item) => (
-                  <li key={item} className="flex items-center gap-2 text-sm text-slate-700">
-                    <Check className="w-4 h-4 text-teal-500 shrink-0" />
+                  <li key={item} className="flex items-center gap-2 text-sm text-slate-300">
+                    <Check className="w-4 h-4 text-teal-400 shrink-0" />
                     {item}
                   </li>
                 ))}
               </ul>
             </div>
 
-            <div className="rounded-2xl border-2 border-slate-200 p-7">
+            <div className="rounded-2xl border-2 border-slate-700 p-7">
               <div className="mb-1">
-                <span className="font-bold text-slate-900 text-lg">Bitly Growth</span>
+                <span className="font-bold text-slate-300 text-lg">Leading platforms</span>
               </div>
-              <p className="text-4xl font-bold text-slate-300 mb-5">
-                $29<span className="text-base font-normal text-slate-400">/month</span>
+              <p className="text-4xl font-bold text-slate-600 mb-5">
+                $29<span className="text-base font-normal text-slate-600">/month</span>
               </p>
               <ul className="space-y-2.5">
                 {[
@@ -229,8 +224,8 @@ export default function Growth() {
                   'Edit destination anytime',
                   'No permanent free tier',
                 ].map((item) => (
-                  <li key={item} className="flex items-center gap-2 text-sm text-slate-400">
-                    <Check className="w-4 h-4 text-slate-300 shrink-0" />
+                  <li key={item} className="flex items-center gap-2 text-sm text-slate-600">
+                    <Check className="w-4 h-4 text-slate-700 shrink-0" />
                     {item}
                   </li>
                 ))}
@@ -241,18 +236,18 @@ export default function Growth() {
       </section>
 
       {/* Social Proof */}
-      <section className="bg-slate-50 py-16 sm:py-20">
+      <section className="bg-slate-800/50 py-16 sm:py-20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-2">What early users are saying</h2>
-            <p className="text-slate-400 text-sm">Early adopter quotes</p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-2">What early users are saying</h2>
+            <p className="text-slate-500 text-sm">Early adopter quotes</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {testimonials.map((t) => (
-              <div key={t.name} className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col">
-                <p className="text-slate-700 leading-relaxed mb-5 flex-1">"{t.quote}"</p>
+              <div key={t.name} className="bg-slate-800 rounded-2xl p-6 border border-slate-700 flex flex-col">
+                <p className="text-slate-300 leading-relaxed mb-5 flex-1">"{t.quote}"</p>
                 <div>
-                  <p className="font-semibold text-slate-900 text-sm">{t.name}</p>
+                  <p className="font-semibold text-white text-sm">{t.name}</p>
                   <p className="text-slate-500 text-xs">{t.role}</p>
                 </div>
               </div>
@@ -264,22 +259,26 @@ export default function Growth() {
       {/* FAQ */}
       <section className="py-16 sm:py-20">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 text-center mb-12">Frequently asked</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-white text-center mb-12">Frequently asked</h2>
           {faqs.map((f) => <FAQItem key={f.q} q={f.q} a={f.a} />)}
         </div>
       </section>
 
       {/* Bottom CTA */}
-      <section className="bg-slate-900 py-16 sm:py-20 text-center">
+      <section className="bg-teal-900/40 border-t border-teal-800/50 py-16 sm:py-20 text-center">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
             Join small businesses turning scans into customers
           </h2>
           <p className="text-slate-400 mb-10">Start free. Upgrade when ready. Cancel anytime.</p>
-          <CtaButton label="Start for $12/month" dark />
+          <CtaButton label="Start for $12/month" />
           <p className="text-slate-500 text-sm mt-4">Includes everything in Editable QR Kit</p>
         </div>
       </section>
+
+      <div className="border-t border-slate-800 py-6 text-center">
+        <p className="text-slate-600 text-sm">© {new Date().getFullYear()} QRcraft. All rights reserved.</p>
+      </div>
     </div>
   );
 }
