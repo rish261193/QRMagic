@@ -25,7 +25,7 @@ export default function Hero() {
             </h1>
 
             <p className="text-base sm:text-lg text-slate-300 leading-relaxed mb-8 max-w-lg">
-              Create permanent QR codes for free. Upgrade when you want to track scans, capture emails, and drive repeat sales.
+              Perfect for Etsy sellers, food vendors and local businesses. Create a permanent QR code for free — upgrade when you want to capture emails, track scans and drive repeat sales.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 mb-8 w-full sm:w-auto">
