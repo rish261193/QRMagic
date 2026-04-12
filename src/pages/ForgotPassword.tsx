@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { QrCode, Loader2, CheckCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 
 export default function ForgotPassword() {
   const navigate = useNavigate();
+  useEffect(() => { window.scrollTo(0, 0); document.title = 'Forgot Password — QRcraft'; }, []);
   const [email, setEmail] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [sent, setSent] = useState(false);
