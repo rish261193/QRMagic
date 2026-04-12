@@ -35,7 +35,7 @@ export default function Contact() {
             <QrCode className="w-5 h-5 text-teal-400" />
             <span className="font-bold text-white text-lg">QRcraft</span>
           </button>
-          <button onClick={() => navigate('/')} className="text-sm font-medium text-slate-400 hover:text-white transition-colors">
+          <button onClick={() => navigate(-1)} className="text-sm font-medium text-slate-400 hover:text-white transition-colors">
             ← Back to home
           </button>
         </div>

@@ -2,18 +2,3 @@
 @tailwind components;
 @tailwind utilities;
 
-@keyframes qrReveal {
-  from { opacity: 1; }
-  to   { opacity: 0; }
-}
-
-.qr-plain-overlay {
-  animation: qrReveal 3s ease-in-out 0.5s forwards;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .qr-plain-overlay {
-    animation: none;
-    opacity: 0;
-  }
-}
