@@ -32,28 +32,28 @@ export default function Footer() {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 
   return (
-    <footer className="bg-slate-50 border-t border-slate-200">
+    <footer className="bg-slate-900 border-t border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
           <div className="col-span-2 md:col-span-1">
             <div className="flex items-center gap-2 mb-4">
-              <QrCode className="w-6 h-6 text-slate-900" />
-              <span className="text-xl font-bold text-slate-900">QRcraft</span>
+              <QrCode className="w-6 h-6 text-teal-400" />
+              <span className="text-xl font-bold text-white">QRcraft</span>
             </div>
-            <p className="text-slate-600 text-sm leading-relaxed">
+            <p className="text-slate-400 text-sm leading-relaxed">
               Turn every QR scan into a customer.
             </p>
           </div>
 
           {/* Product */}
           <div>
-            <h3 className="font-semibold text-slate-900 mb-4">Product</h3>
+            <h3 className="font-semibold text-white mb-4">Product</h3>
             <ul className="space-y-3">
               {scrollLinks.map(({ label, sectionId }) => (
                 <li key={label}>
                   <button
                     onClick={() => scrollTo(sectionId)}
-                    className="text-slate-600 hover:text-slate-900 text-sm transition-colors"
+                    className="text-slate-400 hover:text-white text-sm transition-colors"
                   >
                     {label}
                   </button>
@@ -63,7 +63,7 @@ export default function Footer() {
                 <li key={label}>
                   <button
                     onClick={() => navigate(href)}
-                    className="text-slate-600 hover:text-slate-900 text-sm transition-colors"
+                    className="text-slate-400 hover:text-white text-sm transition-colors"
                   >
                     {label}
                   </button>
@@ -74,13 +74,13 @@ export default function Footer() {
 
           {/* Company */}
           <div>
-            <h3 className="font-semibold text-slate-900 mb-4">Company</h3>
+            <h3 className="font-semibold text-white mb-4">Company</h3>
             <ul className="space-y-3">
               {companyLinks.map(({ label, href }) => (
                 <li key={label}>
                   <button
                     onClick={() => navigate(href)}
-                    className="text-slate-600 hover:text-slate-900 text-sm transition-colors"
+                    className="text-slate-400 hover:text-white text-sm transition-colors"
                   >
                     {label}
                   </button>
@@ -91,13 +91,13 @@ export default function Footer() {
 
           {/* Legal */}
           <div>
-            <h3 className="font-semibold text-slate-900 mb-4">Legal</h3>
+            <h3 className="font-semibold text-white mb-4">Legal</h3>
             <ul className="space-y-3">
               {legalLinks.map(({ label, href }) => (
                 <li key={label}>
                   <button
                     onClick={() => navigate(href)}
-                    className="text-slate-600 hover:text-slate-900 text-sm transition-colors"
+                    className="text-slate-400 hover:text-white text-sm transition-colors"
                   >
                     {label}
                   </button>
@@ -107,8 +107,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="pt-8 border-t border-slate-200">
-          <p className="text-center text-slate-600 text-sm">
+        <div className="pt-8 border-t border-slate-800">
+          <p className="text-center text-slate-500 text-sm">
             © {new Date().getFullYear()} QRcraft. All rights reserved.
           </p>
         </div>

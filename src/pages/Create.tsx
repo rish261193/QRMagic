@@ -390,9 +390,12 @@ export default function Create() {
               <div className="mt-3 pt-3 border-t border-slate-100 space-y-2.5 text-left">
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-slate-500">Upgrade to edit destination anytime</span>
-                  <a href="/#pricing" className="text-xs text-teal-600 font-medium hover:text-teal-700 transition-colors">
+                  <button
+                    onClick={() => navigate('/', { state: { scrollTo: 'pricing' } })}
+                    className="text-xs text-teal-600 font-medium hover:text-teal-700 transition-colors"
+                  >
                     See plans →
-                  </a>
+                  </button>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-slate-500">Share QRcraft with someone</span>

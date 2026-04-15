@@ -1,5 +1,23 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import { BrowserRouter, Routes, Route, useLocation, useNavigationType } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+
+// Let the browser save/restore scroll positions on back/forward navigation
+if (typeof window !== 'undefined') {
+  window.history.scrollRestoration = 'auto';
+}
+
+/** Scrolls to top on forward navigation; lets browser restore on back/forward (POP). */
+function ScrollManager() {
+  const location = useLocation();
+  const navType = useNavigationType();
+  useEffect(() => {
+    if (navType !== 'POP') {
+      window.scrollTo(0, 0);
+    }
+  }, [location.key, navType]);
+  return null;
+}
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
 import CustomerJourney from './components/CustomerJourney';
@@ -28,6 +46,13 @@ import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 
 function LandingPage() {
+  const location = useLocation();
+  useEffect(() => {
+    const target = (location.state as { scrollTo?: string } | null)?.scrollTo;
+    if (target) {
+      document.getElementById(target)?.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, []); // run once on mount; state is captured at mount time
   return (
     <div className="min-h-screen bg-white">
       <Navigation />
@@ -48,6 +73,7 @@ function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
+        <ScrollManager />
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/create" element={<Create />} />

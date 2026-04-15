@@ -111,7 +111,7 @@ export default function About() {
       </section>
 
       <footer className="border-t border-slate-800 py-6 text-center">
-        <p className="text-slate-600 text-sm">© {new Date().getFullYear()} QRcraft. All rights reserved.</p>
+        <p className="text-slate-400 text-sm">© {new Date().getFullYear()} QRcraft. All rights reserved.</p>
       </footer>
     </div>
   );
