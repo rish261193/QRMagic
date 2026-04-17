@@ -20,7 +20,7 @@ export default function Hero() {
 
   return (
     <section className="relative overflow-hidden bg-slate-900">
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-800 via-slate-900 to-teal-950 pointer-events-none" />
+      <div className="absolute inset-0 bg-slate-900 pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 pb-32">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -75,7 +75,7 @@ export default function Hero() {
 
           {/* Right column — QR card */}
           <div className="flex justify-center lg:justify-end">
-            <div className="bg-white rounded-2xl shadow-2xl p-5 w-64">
+            <div className="rounded-2xl p-5 w-64" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' }}>
 
               <div className="relative mb-3">
                 <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto rounded-lg">
