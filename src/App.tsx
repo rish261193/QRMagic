@@ -54,7 +54,7 @@ function LandingPage() {
     }
   }, []); // run once on mount; state is captured at mount time
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-slate-900">
       <Navigation />
       <Hero />
       <CustomerJourney />
