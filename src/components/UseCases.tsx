@@ -33,13 +33,13 @@ export default function UseCases() {
   const navigate = useNavigate();
 
   return (
-    <section className="py-24 bg-[#FAFAF8]">
+    <section className="py-12 sm:py-16 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-4xl sm:text-5xl font-extrabold text-[#1A1A2E] mb-4">
+          <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
             Built for the real world
           </h2>
-          <p className="text-xl text-gray-500">
+          <p className="text-xl text-slate-600">
             QRcraft works wherever you need to bridge physical and digital
           </p>
         </div>
@@ -51,15 +51,15 @@ export default function UseCases() {
               <button
                 key={index}
                 onClick={() => navigate('/create')}
-                className="p-6 bg-white rounded-xl border border-[#E8E8E4] text-center cursor-pointer hover:border-[#1A1A2E]/20 transition-all hover:shadow-md"
+                className="p-6 bg-slate-50 rounded-xl border border-slate-200 text-center cursor-pointer hover:border-slate-300 transition-all hover:shadow-md"
               >
-                <div className="w-12 h-12 bg-[#FAFAF8] border border-[#E8E8E4] rounded-lg flex items-center justify-center mx-auto mb-4">
-                  <Icon className="w-6 h-6 text-[#1A1A2E]" />
+                <div className="w-12 h-12 bg-white border border-slate-200 rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <Icon className="w-6 h-6 text-slate-900" />
                 </div>
-                <h3 className="text-lg font-semibold text-[#1A1A2E] mb-2">
+                <h3 className="text-lg font-semibold text-slate-900 mb-2">
                   {useCase.title}
                 </h3>
-                <p className="text-sm text-gray-500 leading-relaxed">
+                <p className="text-sm text-slate-600 leading-relaxed">
                   {useCase.description}
                 </p>
               </button>
