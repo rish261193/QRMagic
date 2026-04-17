@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 export default function CTA() {
   const navigate = useNavigate();
   return (
-    <section className="pt-12 sm:pt-16 pb-0 bg-slate-900">
+    <section className="py-24 bg-[#0F1729]">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
+        <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-6">
           Ready to turn scans into customers?
         </h2>
         <p className="text-xl text-slate-300 mb-10">

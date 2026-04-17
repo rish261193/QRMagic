@@ -58,13 +58,13 @@ export default function Pricing() {
   const navigate = useNavigate();
 
   return (
-    <section id="pricing" className="py-12 sm:py-16 bg-white">
+    <section id="pricing" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
+          <h2 className="text-4xl sm:text-5xl font-extrabold text-[#1A1A2E] mb-4">
             Start free. Scale when ready.
           </h2>
-          <p className="text-xl text-slate-600">
+          <p className="text-xl text-gray-500">
             Pay once for flexibility. Subscribe only for growth.
           </p>
         </div>
@@ -75,8 +75,8 @@ export default function Pricing() {
               key={index}
               className={`relative rounded-2xl p-8 ${
                 plan.highlighted
-                  ? 'bg-slate-900 text-white ring-4 ring-slate-900 shadow-2xl'
-                  : 'bg-white border-2 border-slate-200'
+                  ? 'bg-[#0F1729] text-white ring-4 ring-[#0F1729] shadow-2xl'
+                  : 'bg-white border-2 border-[#E8E8E4]'
               }`}
             >
               {plan.highlighted && (
@@ -86,18 +86,18 @@ export default function Pricing() {
               )}
 
               <div className="mb-6">
-                <h3 className={`text-xl font-semibold mb-2 ${plan.highlighted ? 'text-white' : 'text-slate-900'}`}>
+                <h3 className={`text-xl font-semibold mb-2 ${plan.highlighted ? 'text-white' : 'text-[#1A1A2E]'}`}>
                   {plan.name}
                 </h3>
                 <div className="flex items-baseline gap-2">
-                  <span className={`text-5xl font-bold ${plan.highlighted ? 'text-white' : 'text-slate-900'}`}>
+                  <span className={`text-5xl font-bold ${plan.highlighted ? 'text-white' : 'text-[#1A1A2E]'}`}>
                     {plan.price}
                   </span>
-                  <span className={plan.highlighted ? 'text-slate-300' : 'text-slate-600'}>
+                  <span className={plan.highlighted ? 'text-slate-300' : 'text-gray-500'}>
                     {plan.period}
                   </span>
                 </div>
-                <p className={`mt-4 ${plan.highlighted ? 'text-slate-300' : 'text-slate-600'}`}>
+                <p className={`mt-4 ${plan.highlighted ? 'text-slate-300' : 'text-gray-500'}`}>
                   {plan.description}
                 </p>
               </div>
@@ -106,8 +106,8 @@ export default function Pricing() {
                 onClick={() => navigate(plan.page)}
                 className={`w-full py-3 px-6 rounded-lg font-semibold mb-8 transition-colors ${
                   plan.highlighted
-                    ? 'bg-white text-slate-900 hover:bg-slate-100'
-                    : 'bg-slate-900 text-white hover:bg-slate-800'
+                    ? 'bg-white text-[#0F1729] hover:bg-slate-100'
+                    : 'bg-[#1A1A2E] text-white hover:bg-[#0F1729]'
                 }`}
               >
                 {plan.cta}
@@ -117,7 +117,7 @@ export default function Pricing() {
                 {plan.features.map((feature, fi) => (
                   <li key={fi} className="flex items-start gap-3">
                     <Check className={`w-5 h-5 flex-shrink-0 mt-0.5 ${plan.highlighted ? 'text-emerald-400' : 'text-emerald-600'}`} />
-                    <span className={plan.highlighted ? 'text-slate-100' : 'text-slate-700'}>
+                    <span className={plan.highlighted ? 'text-slate-100' : 'text-[#1A1A2E]/80'}>
                       {feature}
                     </span>
                   </li>

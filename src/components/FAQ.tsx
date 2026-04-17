@@ -48,13 +48,13 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="py-12 sm:py-16 bg-white">
+    <section id="faq" className="py-24 bg-[#FAFAF8]">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
-          <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
+          <h2 className="text-4xl sm:text-5xl font-extrabold text-[#1A1A2E] mb-4">
             Frequently asked questions
           </h2>
-          <p className="text-lg text-slate-500">
+          <p className="text-lg text-gray-500">
             Everything you need to know about QRcraft
           </p>
         </div>
@@ -63,24 +63,24 @@ export default function FAQ() {
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className="border border-slate-200 rounded-xl overflow-hidden bg-white hover:border-slate-300 transition-colors"
+              className="border border-[#E8E8E4] rounded-xl overflow-hidden bg-white hover:border-[#1A1A2E]/20 transition-colors"
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
                 className="w-full px-6 py-5 flex items-center justify-between text-left"
               >
-                <span className="font-semibold text-base text-slate-900 pr-8">
+                <span className="font-semibold text-base text-[#1A1A2E] pr-8">
                   {faq.question}
                 </span>
                 <ChevronDown
-                  className={`w-5 h-5 text-slate-400 flex-shrink-0 transition-transform duration-200 ${
+                  className={`w-5 h-5 text-gray-400 flex-shrink-0 transition-transform duration-200 ${
                     openIndex === index ? 'rotate-180' : ''
                   }`}
                 />
               </button>
               {openIndex === index && (
                 <div className="px-6 pb-5">
-                  <p className="text-slate-500 leading-relaxed text-sm">
+                  <p className="text-gray-500 leading-relaxed text-sm">
                     {faq.answer}
                   </p>
                 </div>
@@ -91,7 +91,7 @@ export default function FAQ() {
 
         {/* Bottom CTA nudge */}
         <div className="text-center mt-12">
-          <p className="text-slate-500 text-sm mb-3">Still have questions?</p>
+          <p className="text-gray-500 text-sm mb-3">Still have questions?</p>
           <a
             href="mailto:hello@qrcraft.co"
             className="text-teal-600 font-semibold text-sm hover:text-teal-700 transition-colors"

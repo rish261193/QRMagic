@@ -19,40 +19,38 @@ export default function Hero() {
   const overlayOpacity = activeStyle !== 'brand' ? 1 : 0;
 
   return (
-    <section className="relative overflow-hidden bg-slate-900">
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-800 via-slate-900 to-teal-950 pointer-events-none" />
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 pb-32">
+    <section className="relative overflow-hidden bg-[#FAFAF8]">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-36 pb-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
           {/* Left column */}
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
 
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-900/50 border border-emerald-700 rounded-full mb-6">
-              <QrCode className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-              <span className="text-sm font-semibold text-emerald-300 tracking-tight">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-50 border border-emerald-200 rounded-full mb-6">
+              <QrCode className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+              <span className="text-sm font-semibold text-emerald-700 tracking-tight">
                 Free QR codes that never expire
               </span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.08] mb-5">
+            <h1 className="text-5xl sm:text-[64px] font-extrabold tracking-tight text-[#1A1A2E] leading-[1.08] mb-5">
               Turn every QR scan into a customer
             </h1>
 
-            <p className="text-base sm:text-lg text-slate-300 leading-relaxed mb-8 max-w-lg">
-              Perfect for Etsy sellers, food vendors and local businesses. Create a permanent QR code for free — upgrade when you want to capture emails, track scans and drive repeat sales.
+            <p className="text-lg text-gray-500 leading-relaxed mb-8 max-w-lg">
+              Create a free branded QR code for your business — upgrade for scan tracking and email capture.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 mb-8 w-full sm:w-auto">
               <button
                 onClick={() => navigate('/create')}
-                className="px-7 py-3.5 bg-emerald-500 text-white rounded-xl font-semibold text-base hover:bg-emerald-400 transition-colors"
+                className="h-12 px-7 bg-emerald-600 text-white rounded-lg font-semibold text-base hover:bg-emerald-500 transition-colors"
               >
                 Create free QR
               </button>
               <button
                 onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
-                className="px-7 py-3.5 bg-transparent text-white border border-slate-600 rounded-xl font-semibold text-base hover:bg-slate-800 transition-colors"
+                className="h-12 px-7 border border-[#1A1A2E]/20 rounded-lg font-semibold text-base text-[#1A1A2E] hover:bg-[#1A1A2E]/5 transition-colors"
               >
                 See how it works
               </button>
@@ -65,8 +63,8 @@ export default function Hero() {
                 'Works after printing',
                 'Upgrade only for growth tools',
               ].map((item, i) => (
-                <div key={i} className="flex items-center gap-2 text-slate-300 text-sm">
-                  <Check className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                <div key={i} className="flex items-center gap-2 text-gray-400 text-sm">
+                  <Check className="w-4 h-4 text-emerald-500 flex-shrink-0" />
                   <span>{item}</span>
                 </div>
               ))}
@@ -75,7 +73,7 @@ export default function Hero() {
 
           {/* Right column — QR card */}
           <div className="flex justify-center lg:justify-end">
-            <div className="bg-white rounded-2xl shadow-2xl p-5 w-64">
+            <div className="bg-white w-72 rounded-2xl p-6" style={{ boxShadow: '0 20px 60px rgba(0,0,0,0.12)' }}>
 
               <div className="relative mb-3">
                 <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto rounded-lg">

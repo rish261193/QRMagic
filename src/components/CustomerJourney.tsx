@@ -25,13 +25,13 @@ const steps = [
 
 export default function CustomerJourney() {
   return (
-    <section className="py-12 sm:py-16 bg-slate-100 mt-8">
+    <section className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
+          <h2 className="text-4xl sm:text-5xl font-extrabold text-[#1A1A2E] mb-4">
             What happens after someone scans?
           </h2>
-          <p className="text-xl text-slate-600">
+          <p className="text-xl text-gray-500">
             From QR code to customer in seconds
           </p>
         </div>
@@ -41,23 +41,23 @@ export default function CustomerJourney() {
             const Icon = step.icon;
             return (
               <div key={index} className="relative">
-                <div className="bg-slate-50 rounded-2xl p-8 border border-slate-200 h-full">
-                  <div className="absolute -top-4 -left-4 w-8 h-8 bg-slate-900 text-white rounded-full flex items-center justify-center font-bold text-sm">
+                <div className="bg-[#FAFAF8] rounded-xl p-8 border border-[#E8E8E4] h-full">
+                  <div className="absolute -top-4 -left-4 w-8 h-8 bg-[#1A1A2E] text-white rounded-full flex items-center justify-center font-bold text-sm">
                     {index + 1}
                   </div>
-                  <div className="w-12 h-12 bg-slate-900 rounded-xl flex items-center justify-center mb-6">
+                  <div className="w-12 h-12 bg-[#1A1A2E] rounded-xl flex items-center justify-center mb-6">
                     <Icon className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="text-lg font-semibold text-slate-900 mb-2">
+                  <h3 className="text-lg font-semibold text-[#1A1A2E] mb-2">
                     {step.title}
                   </h3>
-                  <p className="text-slate-600 leading-relaxed text-sm">
+                  <p className="text-gray-500 leading-relaxed text-sm">
                     {step.description}
                   </p>
                 </div>
 
                 {index < steps.length - 1 && (
-                  <div className="hidden lg:block absolute top-1/2 -right-3 w-6 h-0.5 bg-slate-200" />
+                  <div className="hidden lg:block absolute top-1/2 -right-3 w-6 h-0.5 bg-[#E8E8E4]" />
                 )}
               </div>
             );

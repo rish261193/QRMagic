@@ -33,10 +33,10 @@ export default function OutcomeSection() {
   const navigate = useNavigate();
 
   return (
-    <section className="py-12 sm:py-16 bg-slate-50">
+    <section className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
+          <h2 className="text-4xl sm:text-5xl font-extrabold text-[#1A1A2E] mb-4">
             What do you want your QR to do?
           </h2>
         </div>
@@ -48,15 +48,15 @@ export default function OutcomeSection() {
               <button
                 key={index}
                 onClick={() => navigate('/create')}
-                className={`p-6 bg-slate-50 rounded-2xl border border-slate-200 text-left cursor-pointer hover:border-slate-300 transition-all hover:shadow-lg${index === outcomes.length - 1 ? ' lg:col-start-2' : ''}`}
+                className={`p-6 bg-[#FAFAF8] rounded-xl border border-[#E8E8E4] text-left cursor-pointer hover:border-[#1A1A2E]/20 transition-all hover:shadow-lg${index === outcomes.length - 1 ? ' lg:col-start-2' : ''}`}
               >
-                <div className="w-12 h-12 bg-slate-900 rounded-lg flex items-center justify-center mb-4">
+                <div className="w-12 h-12 bg-[#1A1A2E] rounded-lg flex items-center justify-center mb-4">
                   <Icon className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-xl font-semibold text-slate-900 mb-2">
+                <h3 className="text-xl font-semibold text-[#1A1A2E] mb-2">
                   {outcome.title}
                 </h3>
-                <p className="text-slate-600 leading-relaxed">
+                <p className="text-gray-500 leading-relaxed">
                   {outcome.description}
                 </p>
               </button>
