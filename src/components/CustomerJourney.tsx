@@ -28,7 +28,7 @@ export default function CustomerJourney() {
     <section className="py-12 sm:py-16 bg-[#0F1729]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
+          <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4 whitespace-nowrap">
             What happens after someone scans?
           </h2>
           <p className="text-xl text-slate-600">
